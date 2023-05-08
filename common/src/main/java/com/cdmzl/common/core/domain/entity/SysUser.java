@@ -1,24 +1,24 @@
 package com.cdmzl.common.core.domain.entity;
 
-import java.util.Date;
-import java.util.List;
-import javax.validation.constraints.*;
-
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.cdmzl.common.actable.annotation.Column;
-import com.cdmzl.common.actable.annotation.Table;
-import com.cdmzl.common.actable.constants.MySqlTypeConstant;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.cdmzl.common.annotation.Excel;
 import com.cdmzl.common.annotation.Excel.ColumnType;
 import com.cdmzl.common.annotation.Excel.Type;
 import com.cdmzl.common.annotation.Excels;
 import com.cdmzl.common.core.domain.BaseEntity;
 import com.cdmzl.common.xss.Xss;
+import com.code.actable.annotation.Column;
+import com.code.actable.annotation.Table;
+import com.code.actable.constants.MySqlTypeConstant;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 用户对象 sys_user

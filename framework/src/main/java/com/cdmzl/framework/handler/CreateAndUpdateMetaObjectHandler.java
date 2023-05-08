@@ -4,10 +4,10 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.HttpStatus;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.cdmzl.common.core.domain.BaseEntity;
-import com.cdmzl.common.actable.utils.StringUtils;
 import com.cdmzl.common.core.domain.model.LoginUser;
 import com.cdmzl.common.exception.ServiceException;
 import com.cdmzl.common.utils.SecurityUtils;
+import com.cdmzl.common.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 
@@ -17,6 +17,7 @@ import java.util.Date;
  * MP注入处理器
  *
 
+ * @author Administrator
  * @date 2021/4/25
  */
 @Slf4j

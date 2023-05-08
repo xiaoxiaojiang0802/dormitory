@@ -1,9 +1,9 @@
 package com.cdmzl.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.cdmzl.common.actable.annotation.Column;
-import com.cdmzl.common.actable.annotation.Table;
-import com.cdmzl.common.actable.constants.MySqlTypeConstant;
+import com.code.actable.annotation.Column;
+import com.code.actable.annotation.Table;
+import com.code.actable.constants.MySqlTypeConstant;
 import com.cdmzl.common.core.domain.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -7,8 +7,8 @@ import java.util.Map;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.cdmzl.common.actable.annotation.Column;
-import com.cdmzl.common.actable.constants.MySqlTypeConstant;
+import com.code.actable.annotation.Column;
+import com.code.actable.constants.MySqlTypeConstant;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

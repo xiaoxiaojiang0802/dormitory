@@ -1,6 +1,6 @@
 package com.cdmzl.system.entity;
 
-import com.cdmzl.common.actable.annotation.Table;
+import com.code.actable.annotation.Table;
 import lombok.Data;
 
 /**

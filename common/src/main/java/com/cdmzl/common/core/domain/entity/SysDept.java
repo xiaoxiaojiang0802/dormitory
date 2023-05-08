@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.cdmzl.common.actable.annotation.Column;
+import com.code.actable.annotation.Column;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
