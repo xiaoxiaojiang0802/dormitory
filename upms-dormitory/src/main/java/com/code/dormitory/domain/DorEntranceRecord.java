@@ -1,25 +1,42 @@
 package com.code.dormitory.domain;
 
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.code.actable.annotation.Column;
+import com.code.actable.annotation.Table;
+import com.code.actable.constants.MySqlTypeConstant;
+import com.code.common.core.domain.BaseEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
 /**
  * @author 小江
- * @description TODO
  * @date 2023/5/8 13:31
  **/
-public class DorEntranceRecord {
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Table
+public class DorEntranceRecord extends BaseEntity {
 
-    @TableField("student_id")
-    private Long studentId; // 学生ID
+    /**
+     * 学生ID
+     */
+    private Long userId;
 
-    @TableField("bed_id")
-    private Long bedId; // 床位ID
+    /**
+     * 床位ID
+     */
+    private Long bedId;
 
-    @TableField("entrance_time")
-    private Date entranceTime; // 入住时间
+    /**
+     * 入住时间
+     */
+    @Column(type = MySqlTypeConstant.DATETIME)
+    private Date entranceTime;
 
-    @TableField("leave_time")
-    private Date leaveTime; // 离开时间
+    /**
+     * 离开时间
+     */
+    @Column(type = MySqlTypeConstant.DATETIME)
+    private Date leaveTime;
 }

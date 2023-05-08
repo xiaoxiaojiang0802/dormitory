@@ -110,8 +110,8 @@ token:
 # MyBatis配置
 mybatis-plus:
   # 搜索指定包别名
-  mapperPackage: com.cdmzl.**.mapper,com.cdmzl.**.dao
-  typeAliasesPackage: com.cdmzl.**.domain,com.cdmzl.**.entity
+  mapperPackage: com.code.**.mapper,com.code.**.dao
+  typeAliasesPackage: com.code.**.domain,com.code.**.entity
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:mapper/**/*Mapper.xml,classpath*:mapper/*Mapper.xml,classpath*:mapper/**/*Dao.xml
   # 加载全局的配置文件
@@ -189,7 +189,7 @@ actable:
   database:
     type: mysql
   model:
-    pack: com.cdmzl.*.entity,com.cdmzl.*.domain
+    pack: com.code.*.entity,com.code.*.domain
   table:
     simple: true
     auto: update

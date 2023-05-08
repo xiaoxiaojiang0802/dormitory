@@ -69,10 +69,6 @@ public class BaseEntity implements Serializable {
         return searchValue;
     }
 
-    public void setSearchValue(String searchValue) {
-        this.searchValue = searchValue;
-    }
-
     public String getCreateBy() {
         return createBy;
     }

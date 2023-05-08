@@ -46,6 +46,10 @@
             <groupId>com.code</groupId>
             <artifactId>framework</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.code</groupId>
+            <artifactId>upms-dormitory</artifactId>
+        </dependency>
 
     </dependencies>
 

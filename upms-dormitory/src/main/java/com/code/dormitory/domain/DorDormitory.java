@@ -1,7 +1,5 @@
 package com.code.dormitory.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.code.actable.annotation.Table;
 import com.code.common.core.domain.BaseEntity;
@@ -17,18 +15,28 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table
 public class DorDormitory extends BaseEntity {
-    @TableId(type = IdType.AUTO)
-    private Long id; // 主键，使用自增长策略
 
-    @TableField("dormitory_number")
-    private String dormitoryNumber; // 宿舍编号
 
-    @TableField("dormitory_type")
-    private String dormitoryType; // 宿舍类型
+    @TableId
+    private Long id;
 
-    @TableField("floor")
-    private Integer floor; // 楼层
+    /**
+     * 宿舍编号
+     */
+    private String dormitoryNumber;
 
-    @TableField("building_id")
-    private Long buildingId; // 所属楼栋ID
+    /**
+     * 宿舍类型
+     */
+    private String dormitoryType;
+
+    /**
+     * 楼层
+     */
+    private Integer floor;
+
+    /**
+     * 所属楼栋ID
+     */
+    private Long buildingId;
 }
