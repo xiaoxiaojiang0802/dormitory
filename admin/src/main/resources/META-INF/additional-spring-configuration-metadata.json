@@ -1,0 +1,28 @@
+{
+  "properties": [
+    {
+      "name": "swagger.groups",
+      "type": "java.lang.String",
+      "description": "Description for swagger.groups."
+    },
+    {
+      "name": "oss.access-key",
+      "type": "java.lang.String",
+      "description": "Description for oss.access-key."
+    },
+    {
+      "name": "oss.secret-key",
+      "type": "java.lang.String",
+      "description": "Description for oss.secret-key."
+    },
+    {
+      "name": "oss.bucket-name",
+      "type": "java.lang.String",
+      "description": "Description for oss.bucket-name."
+    },
+    {
+      "name": "oss.endpoint",
+      "type": "java.lang.String",
+      "description": "Description for oss.endpoint."
+    }
+  ] }
