@@ -12,7 +12,7 @@
     <description>宿舍管理系统</description>
 
     <properties>
-        <mzl.version>1.0.0</mzl.version>
+        <dormitory.version>1.0.0</dormitory.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>8</java.version>
@@ -189,50 +189,50 @@
             <dependency>
                 <groupId>com.code</groupId>
                 <artifactId>quartz</artifactId>
-                <version>${mzl.version}</version>
+                <version>${dormitory.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
                 <groupId>com.code</groupId>
                 <artifactId>generator</artifactId>
-                <version>${mzl.version}</version>
+                <version>${dormitory.version}</version>
             </dependency>
             <!-- 项目管理-->
             <dependency>
                 <groupId>com.code</groupId>
                 <artifactId>pm-api</artifactId>
-                <version>${mzl.version}</version>
+                <version>${dormitory.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.code</groupId>
                 <artifactId>pm-biz</artifactId>
-                <version>${mzl.version}</version>
+                <version>${dormitory.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.code</groupId>
                 <artifactId>file-view</artifactId>
-                <version>${mzl.version}</version>
+                <version>${dormitory.version}</version>
             </dependency>
             <!-- 核心模块-->
             <dependency>
                 <groupId>com.code</groupId>
                 <artifactId>framework</artifactId>
-                <version>${mzl.version}</version>
+                <version>${dormitory.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
                 <groupId>com.code</groupId>
-                <artifactId>system</artifactId>
-                <version>${mzl.version}</version>
+                <artifactId>upms-system</artifactId>
+                <version>${dormitory.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.code</groupId>
                 <artifactId>common</artifactId>
-                <version>${mzl.version}</version>
+                <version>${dormitory.version}</version>
             </dependency>
 
         </dependencies>
@@ -241,8 +241,9 @@
     <modules>
         <module>admin</module>
         <module>framework</module>
-        <module>system</module>
+        <module>upms-system</module>
         <module>common</module>
+        <module>upms-dormitory</module>
     </modules>
     <packaging>pom</packaging>
 
