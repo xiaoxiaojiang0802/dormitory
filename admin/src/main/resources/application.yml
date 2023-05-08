@@ -87,7 +87,7 @@ knife4j:
 # 日志配置
 logging:
   level:
-    com.cdmzl: debug
+    com.code: debug
     org.springframework: warn
 
 # 用户配置
