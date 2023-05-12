@@ -56,7 +56,7 @@ public class CaptchaController {
         String uuid = IdUtils.simpleUUID();
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
 
-        String capStr = null, code = null;
+        String capStr, code = null;
         BufferedImage image = null;
 
         // 生成验证码
@@ -74,6 +74,7 @@ public class CaptchaController {
         // 转换流信息写出
         FastByteArrayOutputStream os = new FastByteArrayOutputStream();
         try {
+            assert image != null;
             ImageIO.write(image, "jpg", os);
         } catch (IOException e) {
             return AjaxResult.error(e.getMessage());

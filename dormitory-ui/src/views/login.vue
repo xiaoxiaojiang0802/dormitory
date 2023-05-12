@@ -32,10 +32,6 @@
           <img :src="codeUrl" @click="getCode" class="login-code-img"/>
         </div>
       </el-form-item>
-      <el-radio-group v-model="loginForm.userType">
-        <el-radio label="0" style="margin:0px 0px 25px 0px;">教师</el-radio>
-        <el-radio label="1" style="margin:0px 0px 25px 15px;">学生</el-radio>
-      </el-radio-group>
       <el-form-item style="width:100%;">
         <el-button :loading="loading"
                    size="medium"
@@ -137,14 +133,7 @@ export default {
             Cookies.remove("password");
             Cookies.remove('rememberMe');
           }
-          if (this.loginForm.userType === "0") {
-            this.redirect = "/index";
-          } else {
-            this.redirect = "/main";
-          }
-          console.log("redirect", this.redirect);
           this.$store.dispatch("Login", this.loginForm).then(() => {
-            console.log("redirect2", this.redirect);
             this.$router.push({path: this.redirect});
           }).catch(() => {
             this.loading = false;

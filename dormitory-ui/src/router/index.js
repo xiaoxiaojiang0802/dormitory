@@ -10,28 +10,6 @@ import LayoutMain from '@/layout/main';
 // 公共路由
 export const constantRoutes = [
   {
-    path: '/main',
-    component: LayoutMain,
-    hidden: true,
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/study/main')
-      }
-    ]
-  },
-  {
-    path: '/study/info/:id',
-    component: LayoutMain,
-    hidden: true,
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/view/course/info')
-      }
-    ]
-  },
-  {
     path: '/redirect',
     component: Layout,
     hidden: true,

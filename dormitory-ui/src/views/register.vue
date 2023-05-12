@@ -13,8 +13,7 @@
           type="password"
           auto-complete="off"
           placeholder="密码"
-          @keyup.enter.native="handleRegister"
-        >
+          @keyup.enter.native="handleRegister">
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
