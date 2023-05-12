@@ -1,5 +1,6 @@
 package com.code.dormitory.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.code.actable.annotation.Column;
 import com.code.actable.annotation.Table;
 import com.code.actable.constants.MySqlTypeConstant;
@@ -10,34 +11,37 @@ import lombok.EqualsAndHashCode;
 import java.util.Date;
 
 /**
- * 居住记录
- *
- * @date 2023/5/8 13:31
- **/
+ * 访客记录
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table
-public class DorEntranceRecord extends BaseEntity {
+public class DorVisitor extends BaseEntity {
+
+
+    @TableId
+    private Long visitorId;
+
 
     /**
-     * 学生ID
+     * 姓名
      */
-    private Long userId;
+    private String name;
 
     /**
-     * 床位ID
+     * 联系电话
      */
-    private Long bedId;
+    private String phone;
+
 
     /**
-     * 入住时间
+     * 来访时间
      */
     @Column(type = MySqlTypeConstant.DATETIME)
-    private Date entranceTime;
-
+    private Date visitDate;
     /**
      * 离开时间
      */
     @Column(type = MySqlTypeConstant.DATETIME)
-    private Date leaveTime;
+    private Date leaveDate;
 }

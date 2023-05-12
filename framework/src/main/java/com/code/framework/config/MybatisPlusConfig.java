@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * @author 小江
+ * 
  * @description TODO
  * @date 2023/4/3 9:55
  **/

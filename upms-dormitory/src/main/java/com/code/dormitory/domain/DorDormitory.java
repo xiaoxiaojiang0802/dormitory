@@ -7,7 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @author 小江
+ * 宿舍
+ *
  * @description TODO
  * @date 2023/5/8 13:27
  **/

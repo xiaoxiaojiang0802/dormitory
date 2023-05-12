@@ -7,7 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @author 小江
+ * 床位
+ *
  * @description TODO
  * @date 2023/5/8 13:30
  **/
@@ -18,14 +19,17 @@ public class DorBed extends BaseEntity {
 
     @TableId
     private Long id;
-    /**
-     * 床位编号
-     */
-    private String bedNumber;
+
     /**
      * 所属宿舍ID
      */
     private Long dormitoryId;
+
+    /**
+     * 床位编号
+     */
+    private String bedNumber;
+
     /**
      * 床位状态
      */
