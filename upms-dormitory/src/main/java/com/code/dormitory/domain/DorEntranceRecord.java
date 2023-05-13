@@ -12,6 +12,7 @@ import java.util.Date;
 /**
  * 居住记录
  *
+ * @author Administrator
  * @date 2023/5/8 13:31
  **/
 @EqualsAndHashCode(callSuper = true)
