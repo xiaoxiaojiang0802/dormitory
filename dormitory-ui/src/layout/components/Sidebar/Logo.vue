@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      title: '在线学习后台管理系统',
+      title: '宿舍管理系统',
       logo: logoImg
     }
   }

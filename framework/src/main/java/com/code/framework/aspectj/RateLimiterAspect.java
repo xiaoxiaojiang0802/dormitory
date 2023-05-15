@@ -1,10 +1,10 @@
 //package com.cdmzl.framework.aspectj;
 //
-//import com.cdmzl.common.annotation.RateLimiter;
-//import com.cdmzl.common.enums.LimitType;
-//import com.cdmzl.common.exception.ServiceException;
-//import com.cdmzl.common.utils.StringUtils;
-//import com.cdmzl.common.utils.ip.IpUtils;
+//import com.code.common.annotation.RateLimiter;
+//import com.code.common.enums.LimitType;
+//import com.code.common.exception.ServiceException;
+//import com.code.common.utils.StringUtils;
+//import com.code.common.utils.ip.IpUtils;
 //import org.aspectj.lang.JoinPoint;
 //import org.aspectj.lang.annotation.Aspect;
 //import org.aspectj.lang.annotation.Before;

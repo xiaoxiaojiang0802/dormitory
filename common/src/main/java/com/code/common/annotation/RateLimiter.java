@@ -1,12 +1,12 @@
-//package com.cdmzl.common.annotation;
+//package com.code.common.annotation;
 //
 //import java.lang.annotation.Documented;
 //import java.lang.annotation.ElementType;
 //import java.lang.annotation.Retention;
 //import java.lang.annotation.RetentionPolicy;
 //import java.lang.annotation.Target;
-//import com.cdmzl.common.constant.CacheConstants;
-//import com.cdmzl.common.enums.LimitType;
+//import com.code.common.constant.CacheConstants;
+//import com.code.common.enums.LimitType;
 //
 ///**
 // * 限流注解

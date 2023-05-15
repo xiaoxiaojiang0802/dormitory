@@ -5,7 +5,6 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout';
-import LayoutMain from '@/layout/main';
 
 // 公共路由
 export const constantRoutes = [
@@ -122,20 +121,6 @@ export const dynamicRoutes = [
         path: '/:userType',
         component: () => import('@/views/system/user/index'),
         name: 'Teacher',
-      }
-    ]
-  },
-  {
-    path: '/monitor/job-log',
-    component: Layout,
-    hidden: true,
-    permissions: ['monitor:job:list'],
-    children: [
-      {
-        path: 'index/:jobId(\\d+)',
-        component: () => import('@/views/monitor/job/log'),
-        name: 'JobLog',
-        meta: {title: '调度日志', activeMenu: '/monitor/job'}
       }
     ]
   },
