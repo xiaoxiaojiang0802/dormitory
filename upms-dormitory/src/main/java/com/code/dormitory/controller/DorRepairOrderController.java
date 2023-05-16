@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/pm/order" )
+@RequestMapping("/dormitory/order" )
 public class DorRepairOrderController extends BaseController {
 
     private final  DorRepairOrderService dorRepairOrderService;

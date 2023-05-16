@@ -12,6 +12,7 @@ import com.code.actable.constants.MySqlTypeConstant;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -19,6 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  *
  * @author ruoyi
  */
+@Data
 public class BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 

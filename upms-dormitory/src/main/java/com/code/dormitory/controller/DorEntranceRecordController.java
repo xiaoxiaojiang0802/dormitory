@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/pm/record" )
+@RequestMapping("/dormitory/record" )
 public class DorEntranceRecordController extends BaseController {
 
     private final  DorEntranceRecordService dorEntranceRecordService;

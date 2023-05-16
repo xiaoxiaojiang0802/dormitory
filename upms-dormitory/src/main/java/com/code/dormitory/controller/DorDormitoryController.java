@@ -20,31 +20,31 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/pm/dormitory" )
+@RequestMapping("/dormitory/dormitory")
 public class DorDormitoryController extends BaseController {
 
-    private final  DorDormitoryService dorDormitoryService;
+    private final DorDormitoryService dorDormitoryService;
 
     /**
      * 查询【请填写功能名称】列表
      */
-    @GetMapping("/page" )
+    @GetMapping("/page")
 
     /**
      * 导出【请填写功能名称】列表
      */
-    @PostMapping("/export" )
+    @PostMapping("/export")
     public void export(HttpServletResponse response, DorDormitory dorDormitory) {
         List<DorDormitory> list = dorDormitoryService.list(Wrappers.query(dorDormitory));
-        ExcelUtil<DorDormitory> util = new ExcelUtil<DorDormitory>(DorDormitory. class);
-        util.exportExcel(response, list, "【请填写功能名称】数据" );
+        ExcelUtil<DorDormitory> util = new ExcelUtil<DorDormitory>(DorDormitory.class);
+        util.exportExcel(response, list, "【请填写功能名称】数据");
     }
 
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @GetMapping(value = "getById/{id}" )
-    public R getById(@PathVariable("id" ) Long id) {
+    @GetMapping(value = "getById/{id}")
+    public R getById(@PathVariable("id") Long id) {
         return R.ok(dorDormitoryService.getById(id));
     }
 
@@ -67,8 +67,8 @@ public class DorDormitoryController extends BaseController {
     /**
      * 删除【请填写功能名称】
      */
-    @DeleteMapping("/removeByIds/{ids}" )
-    public R removeByIds(@PathVariable("ids" ) List<Long> ids) {
+    @DeleteMapping("/removeByIds/{ids}")
+    public R removeByIds(@PathVariable("ids") List<Long> ids) {
         return R.ok(dorDormitoryService.removeByIds(ids));
     }
 }

@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/pm/visitor" )
+@RequestMapping("/dormitory/visitor" )
 public class DorVisitorController extends BaseController {
 
     private final  DorVisitorService dorVisitorService;

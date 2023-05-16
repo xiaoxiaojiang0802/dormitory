@@ -1,7 +1,9 @@
 package com.code.dormitory.domain;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.code.actable.annotation.ColumnComment;
 import com.code.actable.annotation.Table;
+import com.code.actable.annotation.TableComment;
 import com.code.common.core.domain.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +16,7 @@ import lombok.EqualsAndHashCode;
  **/
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table
+@Table(comment = "床位")
 public class DorBed extends BaseEntity {
 
     @TableId
@@ -23,15 +25,18 @@ public class DorBed extends BaseEntity {
     /**
      * 所属宿舍ID
      */
+    @ColumnComment("宿舍")
     private Long dormitoryId;
 
     /**
      * 床位编号
      */
+    @ColumnComment("床位编号")
     private String bedNumber;
 
     /**
      * 床位状态
      */
+    @ColumnComment("床位状态")
     private String status;
 }

@@ -1,6 +1,7 @@
 package com.code.dormitory.domain;
 
 import com.code.actable.annotation.Column;
+import com.code.actable.annotation.ColumnComment;
 import com.code.actable.annotation.Table;
 import com.code.actable.constants.MySqlTypeConstant;
 import com.code.common.core.domain.BaseEntity;
@@ -17,28 +18,30 @@ import java.util.Date;
  **/
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table
+@Table(comment = "居住记录")
 public class DorEntranceRecord extends BaseEntity {
 
     /**
      * 学生ID
      */
+    @ColumnComment("学生")
     private Long userId;
 
     /**
      * 床位ID
      */
+    @ColumnComment("床位")
     private Long bedId;
 
     /**
      * 入住时间
      */
-    @Column(type = MySqlTypeConstant.DATETIME)
+    @Column(comment = "入住时间",type = MySqlTypeConstant.DATETIME)
     private Date entranceTime;
 
     /**
      * 离开时间
      */
-    @Column(type = MySqlTypeConstant.DATETIME)
+    @Column(comment = "离开时间",type = MySqlTypeConstant.DATETIME)
     private Date leaveTime;
 }
