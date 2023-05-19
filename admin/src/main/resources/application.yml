@@ -71,8 +71,8 @@ knife4j:
   production: false
   basic:
     enable: true
-    username: cdmzl
-    password: cdmzl
+    username: admin
+    password: admin
   # 前端Ui的个性化配置属性
   setting:
     # 默认语言
@@ -164,9 +164,9 @@ swagger:
     email: cdmuziling@163.com
   groups:
     - name: 1.自动建表模块
-      basePackage: com.cdmzl.generator.controller
+      basePackage: com.code.generator.controller
     - name: 2.项目管理模块
-      basePackage: com.cdmzl.system.controller
+      basePackage: com.code.system.controller
 
 # security配置
 security:

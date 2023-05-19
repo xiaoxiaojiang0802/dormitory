@@ -1,9 +1,11 @@
 package com.code.dormitory.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.code.common.core.controller.BaseController;
 import com.code.common.core.domain.R;
 import com.code.common.utils.poi.ExcelUtil;
+import com.code.dormitory.domain.DorBuilding;
 import com.code.dormitory.domain.DorDormitory;
 import com.code.dormitory.service.DorDormitoryService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,9 @@ public class DorDormitoryController extends BaseController {
      * 查询【请填写功能名称】列表
      */
     @GetMapping("/page")
+    public R page(Page page, DorDormitory dorDormitory) {
+        return R.ok(dorDormitoryService.page(page, Wrappers.query(dorDormitory)));
+    }
 
     /**
      * 导出【请填写功能名称】列表
@@ -36,7 +41,7 @@ public class DorDormitoryController extends BaseController {
     @PostMapping("/export")
     public void export(HttpServletResponse response, DorDormitory dorDormitory) {
         List<DorDormitory> list = dorDormitoryService.list(Wrappers.query(dorDormitory));
-        ExcelUtil<DorDormitory> util = new ExcelUtil<DorDormitory>(DorDormitory.class);
+        ExcelUtil<DorDormitory> util = new ExcelUtil<>(DorDormitory.class);
         util.exportExcel(response, list, "【请填写功能名称】数据");
     }
 

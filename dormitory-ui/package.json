@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "宿舍管理系统",
   "author": "online-study",
-  "license": "MIT",
+  "license": "set NODE_OPTIONS=--openssl-legacy-provider && ",
   "scripts": {
-    "dev": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",
     "build:stage": "vue-cli-service build --mode staging",
     "preview": "node build/index.js --preview",

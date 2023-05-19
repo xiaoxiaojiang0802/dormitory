@@ -1,7 +1,6 @@
 package com.code.dormitory.domain;
 
 import com.code.actable.annotation.Column;
-import com.code.actable.annotation.ColumnComment;
 import com.code.actable.annotation.Table;
 import com.code.actable.constants.MySqlTypeConstant;
 import com.code.common.core.domain.BaseEntity;
@@ -24,13 +23,13 @@ public class DorEntranceRecord extends BaseEntity {
     /**
      * 学生ID
      */
-    @ColumnComment("学生")
+   @Column(comment = "学生")
     private Long userId;
 
     /**
      * 床位ID
      */
-    @ColumnComment("床位")
+   @Column(comment = "床位")
     private Long bedId;
 
     /**

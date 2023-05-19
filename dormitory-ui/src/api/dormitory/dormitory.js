@@ -10,9 +10,9 @@ export function pageDormitory(query) {
 }
 
 // 查询宿舍详细
-export function getDormitory(createBy) {
+export function getDormitory(id) {
   return request({
-    url: '/dormitory/dormitory/getById/' + createBy,
+    url: '/dormitory/dormitory/getById/' + id,
     method: 'get'
   })
 }

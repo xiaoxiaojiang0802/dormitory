@@ -12,6 +12,8 @@ import java.util.Date;
 
 /**
  * 访客记录
+ *
+ * @author Administrator
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -21,7 +23,6 @@ public class DorVisitor extends BaseEntity {
 
     @TableId
     private Long visitorId;
-
 
     /**
      * 姓名

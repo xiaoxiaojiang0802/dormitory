@@ -1,7 +1,5 @@
 package com.code.dormitory.mapper;
 
-import java.util.List;
-
 import com.code.actable.mapper.BaseMapperPlus;
 import com.code.dormitory.domain.DorRepairOrder;
 
