@@ -7,6 +7,8 @@ import com.code.common.core.domain.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * 床位
  *
@@ -23,6 +25,7 @@ public class DorBed extends BaseEntity {
     /**
      * 所属宿舍ID
      */
+    @NotNull
     @Column(comment = "宿舍")
     private Long dormitoryId;
 
@@ -33,7 +36,7 @@ public class DorBed extends BaseEntity {
     private String bedNumber;
 
     /**
-     * 床位状态
+     * 床位状态 dor_bed_status
      */
     @Column(comment = "床位状态")
     private String status;

@@ -73,7 +73,13 @@
           <dict-tag :options="dict.type.dor_dormitory_type" :value="scope.row.dormitoryType"/>
         </template>
       </el-table-column>
-      <el-table-column label="宿舍编号" align="center" prop="dormitoryNumber"/>
+      <el-table-column label="宿舍编号" align="center" prop="dormitoryNumber">
+        <template slot-scope="scope">
+          <router-link :to="'/dormitory/bed/index/'+scope.row.dormitoryId" class="link-type">
+            <span>{{ scope.row.dormitoryNumber }}</span>
+          </router-link>
+        </template>
+      </el-table-column>
       <el-table-column label="楼层" align="center" prop="floor"/>
       <el-table-column label="是否满员" align="center" prop="full">
         <template slot-scope="scope">

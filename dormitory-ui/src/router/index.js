@@ -113,14 +113,16 @@ export const dynamicRoutes = [
     ]
   },
   {
-    path: '/study/teacher',
+    path: '/dormitory/bed',
     component: Layout,
     hidden: true,
+    permissions: ['dormitory:bed:list'],
     children: [
       {
-        path: '/:userType',
-        component: () => import('@/views/system/user/index'),
-        name: 'Teacher',
+        path: 'index/:dormitoryId(\\d+)',
+        component: () => import('@/views/dormitory/bed/index'),
+        name: 'Bed',
+        meta: {title: '床位信息', activeMenu: '/dormitory/dormitory'}
       }
     ]
   },

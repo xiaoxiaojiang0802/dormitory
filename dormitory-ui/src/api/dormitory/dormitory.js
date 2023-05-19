@@ -7,6 +7,13 @@ export function pageDormitory(query) {
     method: 'get',
     params: query
   })
+}// 查询宿舍列表
+export function listDormitory(query) {
+  return request({
+    url: '/dormitory/dormitory/list',
+    method: 'get',
+    params: query
+  })
 }
 
 // 查询宿舍详细

@@ -2,20 +2,15 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="宿舍" prop="dormitoryId">
-        <el-input
-          v-model="queryParams.dormitoryId"
-          placeholder="请输入宿舍"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-select v-model="queryParams.dormitoryId" clearable>
+          <el-option v-for="item in dormitoryList" :label="item.dormitoryNumber" :key="item.dormitoryId"
+                     :value="item.dormitoryId">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="床位编号" prop="bedNumber">
-        <el-input
-          v-model="queryParams.bedNumber"
-          placeholder="请输入床位编号"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.bedNumber" placeholder="请输入床位编号"
+                  clearable @keyup.enter.native="handleQuery"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -43,49 +38,40 @@
           删除
         </el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini"
-                   @click="handleExport" v-hasPermi="['dormitory:bed:export']">
-          导出
-        </el-button>
-      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="bedList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column label="宿舍" align="center" prop="dormitoryId"/>
+      <el-table-column label="宿舍" align="center" prop="dormitoryId">
+        <template slot-scope="scope">
+          <span v-for="item in dormitoryList"
+                v-if="item.dormitoryId===scope.row.dormitoryId">{{ item.dormitoryNumber }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="床位编号" align="center" prop="bedNumber"/>
-      <el-table-column label="床位状态" align="center" prop="status"/>
+      <el-table-column label="床位状态" align="center" prop="status">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.dor_bed_status" :value="scope.row.status"/>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['dormitory:bed:edit']"
-          >修改
+          <el-button size="mini" type="text" @click="checkInOpen(scope.row)">
+            入住
           </el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['dormitory:bed:remove']"
-          >删除
+          <el-button size="mini" type="text" @click="handleUpdate(scope.row)"
+                     v-hasPermi="['dormitory:bed:edit']">修改
+          </el-button>
+          <el-button size="mini" type="text" @click="handleDelete(scope.row)"
+                     v-hasPermi="['dormitory:bed:remove']">删除
           </el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination
-      v-show="total>0"
-      :total="total"
-      :page.sync="queryParams.pageNum"
-      :limit.sync="queryParams.pageSize"
-      @pagination="getList"
-    />
+    <pagination v-show="total>0" :total="total" :page.sync="queryParams.pageNum"
+                :limit.sync="queryParams.pageSize" @pagination="getList"/>
 
     <!-- 添加或修改床位对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
@@ -95,6 +81,21 @@
         </el-form-item>
         <el-form-item label="床位编号" prop="bedNumber">
           <el-input v-model="form.bedNumber" placeholder="请输入床位编号"/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
+    <!-- 添加或修改床位对话框 -->
+    <el-dialog title="办理入住" :visible.sync="checkOpen" width="500px" append-to-body>
+      <el-form ref="form" :model="inForm" label-width="80px">
+        <el-form-item label="宿舍" prop="dormitoryId">
+          <el-input v-model="inForm.dormitoryId" placeholder="请输入宿舍"/>
+        </el-form-item>
+        <el-form-item label="床位编号" prop="bedNumber">
+          <el-input v-model="inForm.bedNumber" placeholder="请输入床位编号"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -113,9 +114,11 @@ import {
   addBed,
   updateBed
 } from "@/api/dormitory/bed";
+import {listDormitory} from "@/api/dormitory/dormitory";
 
 export default {
   name: "Bed",
+  dicts: ['dor_bed_status'],
   data() {
     return {
       loading: true,
@@ -125,23 +128,37 @@ export default {
       showSearch: true,
       total: 0,
       bedList: [],
+      dormitoryList: [],
       title: "",
       open: false,
+      checkOpen: false,
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        dormitoryId: null,
+        dormitoryId: undefined,
         bedNumber: null,
         status: null
+      },
+      inForm: {
       },
       form: {},
       rules: {}
     };
   },
   created() {
+    this.init();
     this.getList();
   },
   methods: {
+    init() {
+      const dormitoryId = this.$route.params.dormitoryId;
+      if (dormitoryId !== undefined && dormitoryId !== '') {
+        this.queryParams.dormitoryId = dormitoryId
+      }
+      listDormitory().then(res => {
+        this.dormitoryList = res.data;
+      });
+    },
     /** 查询床位列表 */
     getList() {
       this.loading = true;
@@ -192,15 +209,19 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const createBy = row.createBy || this.ids
-      getBed(createBy).then(response => {
+      const bedId = row.bedId || this.ids
+      getBed(bedId).then(response => {
         this.form = response.data;
         this.open = true;
         this.title = "修改床位";
       });
     },
+    checkInOpen(row) {
+      this.checkOpen = true;
+    },
     /** 提交按钮 */
     submitForm() {
+      this.form.dormitoryId = this.queryParams.dormitoryId;
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.createBy != null) {
@@ -230,12 +251,6 @@ export default {
       }).catch(() => {
       });
     },
-    /** 导出按钮操作 */
-    handleExport() {
-      this.download('pm/bed/export', {
-        ...this.queryParams
-      }, `bed_${new Date().getTime()}.xlsx`)
-    }
   }
 }
 ;

@@ -368,6 +368,14 @@ VALUES (30, 1, '四人间', '1', 'dor_dormitory_type', '', 'primary', 'N', '0', 
         ''),
        (32, 3, '八人间', '3', 'dor_dormitory_type', '', 'primary', 'N', '0', 'admin', '2023-04-21 23:08:19', '', NULL,
         '');
+
+INSERT INTO `sys_dict_data`
+VALUES (33, 1, '空闲', '1', 'dor_bed_status', '', 'info', 'N', '0', 'admin', '2023-04-21 23:08:19', '', NULL,
+        ''),
+       (34, 2, '有人', '2', 'dor_bed_status', '', 'primary', 'N', '0', 'admin', '2023-04-21 23:08:19', '', NULL,
+        ''),
+       (35, 3, '维修', '3', 'dor_bed_status', '', 'danger', 'N', '0', 'admin', '2023-04-21 23:08:19', '', NULL,
+        '');
 /*!40000 ALTER TABLE `sys_dict_data` ENABLE KEYS */;
 UNLOCK
 TABLES;
@@ -414,6 +422,8 @@ VALUES (1, '用户性别', 'sys_user_sex', '0', 'admin', '2023-04-21 21:11:38', 
        (9, '操作类型', 'sys_oper_type', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '操作类型列表'),
        (10, '系统状态', 'sys_common_status', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '登录状态列表'),
        (11, '宿舍类型', 'dor_dormitory_type', '0', 'admin', '2023-04-21 23:08:40', '', NULL, '');
+insert into sys_dict_type
+VALUES (12, '床位状态', 'dor_bed_status', '0', 'admin', now(), '', NULL, '');
 /*!40000 ALTER TABLE `sys_dict_type` ENABLE KEYS */;
 UNLOCK
 TABLES;

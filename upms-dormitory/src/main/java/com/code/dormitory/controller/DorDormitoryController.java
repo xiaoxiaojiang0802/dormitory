@@ -36,6 +36,14 @@ public class DorDormitoryController extends BaseController {
     }
 
     /**
+     * 查询【请填写功能名称】列表
+     */
+    @GetMapping("/list")
+    public R list(DorDormitory dorDormitory) {
+        return R.ok(dorDormitoryService.list(Wrappers.query(dorDormitory)));
+    }
+
+    /**
      * 导出【请填写功能名称】列表
      */
     @PostMapping("/export")
@@ -58,7 +66,8 @@ public class DorDormitoryController extends BaseController {
      */
     @PostMapping
     public R add(@RequestBody DorDormitory dorDormitory) {
-        return R.ok(dorDormitoryService.save(dorDormitory));
+        dorDormitoryService.addDormitory(dorDormitory);
+        return R.ok();
     }
 
     /**

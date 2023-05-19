@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,34 +29,35 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/dormitory/bed" )
+@RequestMapping("/dormitory/bed")
 public class DorBedController extends BaseController {
 
-    private final  DorBedService dorBedService;
+    private final DorBedService dorBedService;
 
     /**
      * 查询床位列表
      */
-    @GetMapping("/page" )
-    public R page(Page page,DorBed dorBed) {
+    @GetMapping("/page")
+    @PreAuthorize("@ss.hasPermi('dormitory:bed:list')")
+    public R page(Page page, DorBed dorBed) {
         return R.ok(dorBedService.page(page, Wrappers.query(dorBed)));
     }
 
     /**
      * 导出床位列表
      */
-    @PostMapping("/export" )
+    @PostMapping("/export")
     public void export(HttpServletResponse response, DorBed dorBed) {
         List<DorBed> list = dorBedService.list(Wrappers.query(dorBed));
-        ExcelUtil<DorBed> util = new ExcelUtil<DorBed>(DorBed. class);
-        util.exportExcel(response, list, "床位数据" );
+        ExcelUtil<DorBed> util = new ExcelUtil<>(DorBed.class);
+        util.exportExcel(response, list, "床位数据");
     }
 
     /**
      * 获取床位详细信息
      */
-    @GetMapping(value = "getById/{id}" )
-    public R getById(@PathVariable("id" ) Long id) {
+    @GetMapping(value = "getById/{id}")
+    public R getById(@PathVariable("id") Long id) {
         return R.ok(dorBedService.getById(id));
     }
 
@@ -64,7 +66,7 @@ public class DorBedController extends BaseController {
      */
     @PostMapping
     public R add(@RequestBody DorBed dorBed) {
-        return R.ok(dorBedService.save(dorBed));
+        return R.ok(dorBedService.addBed(dorBed));
     }
 
     /**
@@ -78,8 +80,8 @@ public class DorBedController extends BaseController {
     /**
      * 删除床位
      */
-    @DeleteMapping("/removeByIds/{ids}" )
-    public R removeByIds(@PathVariable("ids" ) List<Long> ids) {
+    @DeleteMapping("/removeByIds/{ids}")
+    public R removeByIds(@PathVariable("ids") List<Long> ids) {
         return R.ok(dorBedService.removeByIds(ids));
     }
 }
