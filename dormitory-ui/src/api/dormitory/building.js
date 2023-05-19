@@ -9,6 +9,14 @@ export function pageBuilding(query) {
   })
 }
 
+// 查询床位列表
+export function listBuilding() {
+  return request({
+    url: '/dormitory/building/list',
+    method: 'get',
+  })
+}
+
 // 查询床位详细
 export function getBuilding(id) {
   return request({

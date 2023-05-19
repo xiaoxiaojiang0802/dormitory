@@ -3,6 +3,8 @@ package com.code.common.core.domain.entity;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.code.common.annotation.Excel;
@@ -15,6 +17,8 @@ import com.code.common.core.domain.BaseEntity;
  *
  * @author ruoyi
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class SysDictData extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -63,6 +67,8 @@ public class SysDictData extends BaseEntity {
      */
     @Excel(name = "是否默认", readConverterExp = "Y=是,N=否")
     private String isDefault;
+
+    private String remark;
 
     /**
      * 状态（0正常 1停用）

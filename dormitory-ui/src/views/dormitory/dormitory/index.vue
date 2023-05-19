@@ -1,8 +1,14 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+      <el-form-item label="楼栋" prop="buildingId">
+        <el-select clearable v-model="queryParams.buildingId" placeholder="请选择楼栋">
+          <el-option v-for="item in buildingList" :key="item.buildingId"
+                     :label="item.name" :value="item.buildingId"/>
+        </el-select>
+      </el-form-item>
       <el-form-item label="宿舍类型" prop="dormitoryType">
-        <el-select v-model="queryParams.dormitoryType" placeholder="请选择类型">
+        <el-select clearable v-model="queryParams.dormitoryType" placeholder="请选择类型">
           <el-option v-for="item in dict.type.dor_dormitory_type" :key="item.dictId"
                      :label="item.label" :value="item.value"/>
         </el-select>
@@ -18,13 +24,11 @@
       <el-form-item label="楼层" prop="floor">
         <el-input v-model="queryParams.floor" placeholder="请输入楼层" clearable @keyup.enter.native="handleQuery"/>
       </el-form-item>
-      <el-form-item label="楼栋" prop="buildingId">
-        <el-input
-          v-model="queryParams.buildingId"
-          placeholder="请输入楼栋"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+      <el-form-item label="是否满员" prop="full">
+        <el-select v-model="queryParams.full" clearable>
+          <el-option v-for="item in dict.type.sys_yes_no" :key="item.full"
+                     :label="item.label" :value="item.value"/>
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -52,21 +56,30 @@
           删除
         </el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini"
-                   @click="handleExport" v-hasPermi="['dormitory:dormitory:export']">
-          导出
-        </el-button>
-      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="dormitoryList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="楼栋" align="center" prop="buildingId">
+        <template slot-scope="scope">
+          <span v-for="item in buildingList" v-if="item.buildingId===scope.row.buildingId">
+            {{ item.name }}
+          </span>
+        </template>
+      </el-table-column>
+      <el-table-column label="宿舍类型" align="center" prop="dormitoryType">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.dor_dormitory_type" :value="scope.row.dormitoryType"/>
+        </template>
+      </el-table-column>
       <el-table-column label="宿舍编号" align="center" prop="dormitoryNumber"/>
-      <el-table-column label="宿舍类型" align="center" prop="dormitoryType"/>
       <el-table-column label="楼层" align="center" prop="floor"/>
-      <el-table-column label="楼栋" align="center" prop="buildingId"/>
+      <el-table-column label="是否满员" align="center" prop="full">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.sys_yes_no" :value="scope.row.full"/>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -101,7 +114,10 @@
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="楼栋" prop="buildingId">
-          <el-input v-model="form.buildingId" placeholder="请输入楼栋"/>
+          <el-select v-model="form.buildingId" placeholder="请选择楼栋">
+            <el-option v-for="item in buildingList" :key="item.buildingId"
+                       :label="item.name" :value="item.buildingId"/>
+          </el-select>
         </el-form-item>
         <el-form-item label="宿舍类型" prop="dormitoryType">
           <el-select v-model="form.dormitoryType" placeholder="请选择类型">
@@ -109,11 +125,11 @@
                        :label="item.label" :value="item.value"/>
           </el-select>
         </el-form-item>
-        <el-form-item label="宿舍编号" prop="dormitoryNumber">
-          <el-input v-model="form.dormitoryNumber" placeholder="请输入宿舍编号"/>
-        </el-form-item>
         <el-form-item label="楼层" prop="floor">
           <el-input v-model="form.floor" placeholder="请输入楼层"/>
+        </el-form-item>
+        <el-form-item label="宿舍编号" prop="dormitoryNumber">
+          <el-input v-model="form.dormitoryNumber" placeholder="请输入宿舍编号"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -132,10 +148,11 @@ import {
   addDormitory,
   updateDormitory
 } from "@/api/dormitory/dormitory";
+import {listBuilding} from "@/api/dormitory/building";
 
 export default {
   name: "Dormitory",
-  dicts: ['dor_dormitory_type'],
+  dicts: ['dor_dormitory_type', 'sys_yes_no'],
   data() {
     return {
       loading: true,
@@ -145,6 +162,7 @@ export default {
       showSearch: true,
       total: 0,
       dormitoryList: [],
+      buildingList: [],
       title: "",
       open: false,
       queryParams: {
@@ -161,6 +179,9 @@ export default {
   },
   created() {
     this.getList();
+    listBuilding().then(res => {
+      this.buildingList = res.data;
+    })
   },
   methods: {
     /** 查询宿舍列表 */

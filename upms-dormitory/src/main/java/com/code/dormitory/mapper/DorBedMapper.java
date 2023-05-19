@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.code.actable.mapper.BaseMapperPlus;
 import com.code.dormitory.domain.DorBed;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 床位Mapper接口
@@ -11,6 +12,7 @@ import com.code.dormitory.domain.DorBed;
  * @author xiaojiang
  * @date 2023-05-15
  */
+@Mapper
 public interface DorBedMapper extends BaseMapperPlus<DorBedMapper, DorBed> {
 
 }
