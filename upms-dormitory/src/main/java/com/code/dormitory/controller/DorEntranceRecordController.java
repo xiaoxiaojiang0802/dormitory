@@ -1,9 +1,11 @@
 package com.code.dormitory.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.code.common.core.controller.BaseController;
 import com.code.common.core.domain.R;
 import com.code.common.utils.poi.ExcelUtil;
+import com.code.dormitory.domain.DorDormitory;
 import com.code.dormitory.domain.DorEntranceRecord;
 import com.code.dormitory.service.DorEntranceRecordService;
 import lombok.RequiredArgsConstructor;
@@ -21,31 +23,34 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/dormitory/record" )
+@RequestMapping("/dormitory/record")
 public class DorEntranceRecordController extends BaseController {
 
-    private final  DorEntranceRecordService dorEntranceRecordService;
+    private final DorEntranceRecordService dorEntranceRecordService;
 
     /**
      * 查询【请填写功能名称】列表
      */
-    @GetMapping("/page" )
+    @GetMapping("/page")
+    public R page(Page page, DorEntranceRecord dorEntranceRecord) {
+        return R.ok(dorEntranceRecordService.page(page, Wrappers.query(dorEntranceRecord)));
+    }
 
     /**
      * 导出【请填写功能名称】列表
      */
-    @PostMapping("/export" )
+    @PostMapping("/export")
     public void export(HttpServletResponse response, DorEntranceRecord dorEntranceRecord) {
         List<DorEntranceRecord> list = dorEntranceRecordService.list(Wrappers.query(dorEntranceRecord));
-        ExcelUtil<DorEntranceRecord> util = new ExcelUtil<DorEntranceRecord>(DorEntranceRecord. class);
-        util.exportExcel(response, list, "【请填写功能名称】数据" );
+        ExcelUtil<DorEntranceRecord> util = new ExcelUtil<DorEntranceRecord>(DorEntranceRecord.class);
+        util.exportExcel(response, list, "【请填写功能名称】数据");
     }
 
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @GetMapping(value = "getById/{entranceTime}" )
-    public R getById(@PathVariable("entranceTime" ) Date entranceTime) {
+    @GetMapping(value = "getById/{entranceTime}")
+    public R getById(@PathVariable("entranceTime") Date entranceTime) {
         return R.ok(dorEntranceRecordService.getById(entranceTime));
     }
 
@@ -54,7 +59,7 @@ public class DorEntranceRecordController extends BaseController {
      */
     @PostMapping
     public R add(@RequestBody DorEntranceRecord dorEntranceRecord) {
-        return R.ok(dorEntranceRecordService.save(dorEntranceRecord));
+        return R.ok(dorEntranceRecordService.addEntranceRecord(dorEntranceRecord));
     }
 
     /**
@@ -68,8 +73,8 @@ public class DorEntranceRecordController extends BaseController {
     /**
      * 删除【请填写功能名称】
      */
-    @DeleteMapping("/removeByIds/{ids}" )
-    public R removeByIds(@PathVariable("ids" ) List<Long> ids) {
+    @DeleteMapping("/removeByIds/{ids}")
+    public R removeByIds(@PathVariable("ids") List<Long> ids) {
         return R.ok(dorEntranceRecordService.removeByIds(ids));
     }
 }

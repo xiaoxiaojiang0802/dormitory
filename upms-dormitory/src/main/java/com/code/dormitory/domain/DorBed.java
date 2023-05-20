@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 /**
  * 床位
  *
+ * @author Administrator
  * @date 2023/5/8 13:30
  **/
 @EqualsAndHashCode(callSuper = true)
@@ -40,4 +41,10 @@ public class DorBed extends BaseEntity {
      */
     @Column(comment = "床位状态")
     private String status;
+
+    /**
+     * 记录id
+     */
+    @Column(comment = "记录id")
+    private Long recordId;
 }

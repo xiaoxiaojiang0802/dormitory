@@ -43,6 +43,12 @@ public class Constants {
      */
     public static final String FAIL = "1";
 
+
+    /**
+     * 是否为系统默认（是）
+     */
+    public static final String YES = "Y";
+
     /**
      * 登录成功
      */
