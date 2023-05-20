@@ -54,6 +54,44 @@
             <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
           </el-form-item>
         </el-form>
+        <el-row :gutter="10" class="mb8">
+          <el-col :span="1.5">
+            <el-button
+              type="primary"
+              plain
+              icon="el-icon-plus"
+              size="mini"
+              @click="handleAdd"
+              v-hasPermi="['system:user:add']"
+            >新增
+            </el-button>
+          </el-col>
+          <el-col :span="1.5">
+            <el-button
+              type="success"
+              plain
+              icon="el-icon-edit"
+              size="mini"
+              :disabled="single"
+              @click="handleUpdate"
+              v-hasPermi="['system:user:edit']"
+            >修改
+            </el-button>
+          </el-col>
+          <el-col :span="1.5">
+            <el-button
+              type="danger"
+              plain
+              icon="el-icon-delete"
+              size="mini"
+              :disabled="multiple"
+              @click="handleDelete"
+              v-hasPermi="['system:user:remove']"
+            >删除
+            </el-button>
+          </el-col>
+          <right-toolbar :showSearch.sync="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
+        </el-row>
         <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center"/>
           <el-table-column label="用户编号" align="center" key="userId" prop="userId" v-if="columns[0].visible"/>
@@ -81,7 +119,7 @@
           <el-table-column
             label="操作"
             align="center"
-            width="160"
+            width="200"
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope" v-if="scope.row.userId !== 1">
@@ -101,18 +139,14 @@
                 v-hasPermi="['system:user:remove']"
               >删除
               </el-button>
-              <el-dropdown size="mini" @command="(command) => handleCommand(command, scope.row)"
-                           v-hasPermi="['system:user:resetPwd', 'system:user:edit']">
-                <el-button size="mini" type="text" icon="el-icon-d-arrow-right">更多</el-button>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item command="handleResetPwd" icon="el-icon-key"
-                                    v-hasPermi="['system:user:resetPwd']">重置密码
-                  </el-dropdown-item>
-                  <el-dropdown-item command="handleAuthRole" icon="el-icon-circle-check"
-                                    v-hasPermi="['system:user:edit']">分配角色
-                  </el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-key"
+                @click="handleResetPwd(scope.row)"
+                v-hasPermi="['system:user:resetPwd']"
+              >重置密码
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -132,36 +166,24 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="用户昵称" prop="nickName">
-              <el-input v-model="form.nickName" placeholder="请输入用户昵称" maxlength="30"/>
+            <el-form-item label="姓名" prop="nickName">
+              <el-input v-model="form.nickName" placeholder="请输入姓名" maxlength="30"/>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="归属部门" prop="deptId">
-              <treeselect v-model="form.deptId" :options="deptOptions" :show-count="true" placeholder="请选择归属部门"/>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
           <el-col :span="12">
             <el-form-item label="手机号码" prop="phonenumber">
               <el-input v-model="form.phonenumber" placeholder="请输入手机号码" maxlength="11"/>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="邮箱" prop="email">
-              <el-input v-model="form.email" placeholder="请输入邮箱" maxlength="50"/>
-            </el-form-item>
-          </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item v-if="form.userId == undefined" label="用户名称" prop="userName">
-              <el-input v-model="form.userName" placeholder="请输入用户名称" maxlength="30"/>
+            <el-form-item v-if="form.userId === undefined" label="登录名" prop="userName">
+              <el-input v-model="form.userName" placeholder="请输入登录名" maxlength="30"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item v-if="form.userId == undefined" label="用户密码" prop="password">
+            <el-form-item v-if="form.userId === undefined" label="用户密码" prop="password">
               <el-input v-model="form.password" placeholder="请输入用户密码" type="password" maxlength="20"
                         show-password/>
             </el-form-item>
@@ -195,29 +217,8 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="岗位">
-              <el-select v-model="form.postIds" multiple placeholder="请选择岗位">
-                <el-option
-                  v-for="item in postOptions"
-                  :key="item.postId"
-                  :label="item.postName"
-                  :value="item.postId"
-                  :disabled="item.status == 1"
-                ></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="角色">
-              <el-select v-model="form.roleIds" multiple placeholder="请选择角色">
-                <el-option
-                  v-for="item in roleOptions"
-                  :key="item.roleId"
-                  :label="item.roleName"
-                  :value="item.roleId"
-                  :disabled="item.status == 1"
-                ></el-option>
-              </el-select>
+            <el-form-item label="学号" prop="cardNo">
+              <el-input v-model="form.cardNo" placeholder="请输入学号" maxlength="30"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -314,7 +315,9 @@ export default {
       // 角色选项
       roleOptions: [],
       // 表单参数
-      form: {},
+      form: {
+        userType: '1',
+      },
       defaultProps: {
         children: "children",
         label: "label"
@@ -537,6 +540,7 @@ export default {
     },
     /** 提交按钮 */
     submitForm: function () {
+      this.form.userType = '1';
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.userId != undefined) {

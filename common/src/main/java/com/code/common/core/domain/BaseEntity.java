@@ -44,7 +44,7 @@ public class BaseEntity implements Serializable {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(type = MySqlTypeConstant.DATETIME, isNull = false)
+    @Column(type = MySqlTypeConstant.DATETIME)
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 

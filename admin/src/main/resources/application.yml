@@ -189,7 +189,7 @@ actable:
   database:
     type: mysql
   model:
-    pack: com.code.*.entity,com.code.*.domain
+    pack: com.code.*.entity,com.code.*.domain,com.code.common.core.domain.entity
   table:
     simple: true
     auto: update

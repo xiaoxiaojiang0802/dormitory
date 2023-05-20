@@ -47,4 +47,10 @@ public class DorEntranceRecord extends BaseEntity {
      */
     @Column(comment = "离开时间", type = MySqlTypeConstant.DATETIME)
     private Date leaveTime;
+
+    /**
+     * 是否离开
+     */
+    @Column(type = MySqlTypeConstant.CHAR, length = 1)
+    private String status;
 }

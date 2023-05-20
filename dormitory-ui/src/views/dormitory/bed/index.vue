@@ -90,17 +90,29 @@
     </el-dialog>
     <!-- 添加或修改床位对话框 -->
     <el-dialog title="办理入住" :visible.sync="checkOpen" width="500px" append-to-body>
-      <el-form ref="form" :model="inForm" label-width="80px">
-        <el-form-item label="宿舍" prop="dormitoryId">
-          <el-input v-model="inForm.dormitoryId" placeholder="请输入宿舍"/>
-        </el-form-item>
-        <el-form-item label="床位编号" prop="bedNumber">
-          <el-input v-model="inForm.bedNumber" placeholder="请输入床位编号"/>
-        </el-form-item>
-      </el-form>
+      <el-table v-loading="loading" :data="studentList" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="50" align="center"/>
+        <el-table-column label="学号" align="center" key="userId" prop="userId"/>
+        <el-table-column label="学生名称" align="center" key="nickName" prop="nickName"
+                         :show-overflow-tooltip="true"/>
+        <el-table-column label="性别" align="center" key="sex" prop="sex"
+                         :show-overflow-tooltip="true"/>
+        <el-table-column label="操作" align="center" width="200" class-name="small-padding fixed-width">
+          <template slot-scope="scope" v-if="scope.row.userId !== 1">
+            <el-button
+              size="mini"
+              type="text"
+              icon="el-icon-edit"
+              @click="handleUpdate(scope.row)"
+              v-hasPermi="['system:user:edit']"
+            >入住
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
+        <el-button type="primary" @click="submitInForm">确 定</el-button>
+        <el-button @click="cancelCheckOpen">取 消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -129,6 +141,7 @@ export default {
       total: 0,
       bedList: [],
       dormitoryList: [],
+      studentList: [],
       title: "",
       open: false,
       checkOpen: false,
@@ -139,8 +152,7 @@ export default {
         bedNumber: null,
         status: null
       },
-      inForm: {
-      },
+      inForm: {},
       form: {},
       rules: {}
     };
@@ -219,8 +231,31 @@ export default {
     checkInOpen(row) {
       this.checkOpen = true;
     },
+    cancelCheckOpen() {
+      this.checkOpen = false;
+    },
     /** 提交按钮 */
     submitForm() {
+      this.form.dormitoryId = this.queryParams.dormitoryId;
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          if (this.form.createBy != null) {
+            updateBed(this.form).then(response => {
+              this.$modal.msgSuccess("修改成功");
+              this.open = false;
+              this.getList();
+            });
+          } else {
+            addBed(this.form).then(response => {
+              this.$modal.msgSuccess("新增成功");
+              this.open = false;
+              this.getList();
+            });
+          }
+        }
+      });
+    },
+    submitInForm() {
       this.form.dormitoryId = this.queryParams.dormitoryId;
       this.$refs["form"].validate(valid => {
         if (valid) {

@@ -2,15 +2,15 @@ package com.code.common.core.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.code.actable.annotation.Column;
+import com.code.actable.annotation.Table;
+import com.code.actable.constants.MySqlTypeConstant;
 import com.code.common.annotation.Excel;
 import com.code.common.annotation.Excel.ColumnType;
 import com.code.common.annotation.Excel.Type;
 import com.code.common.annotation.Excels;
 import com.code.common.core.domain.BaseEntity;
 import com.code.common.xss.Xss;
-import com.code.actable.annotation.Column;
-import com.code.actable.annotation.Table;
-import com.code.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -75,6 +75,12 @@ public class SysUser extends BaseEntity {
     private String sex;
 
     /**
+     * 学号
+     */
+    @Column(comment = "学号")
+    private String cardNo;
+
+    /**
      * 用户头像
      */
     private String avatar;
@@ -93,13 +99,20 @@ public class SysUser extends BaseEntity {
     /**
      * 删除标志（0代表存在 2代表删除）
      */
+    @Column(type = MySqlTypeConstant.CHAR, length = 1, defaultValue = "0")
     private String delFlag;
 
     /**
      * 0教师 1学生
      */
-    @Column(type = MySqlTypeConstant.CHAR, length = 1)
+    @Column(type = MySqlTypeConstant.CHAR, length = 2)
     private String userType;
+
+    /**
+     * 是否入住
+     */
+    @Column(type = MySqlTypeConstant.CHAR, length = 1)
+    private String inDormitory;
 
     /**
      * 最后登录IP
@@ -225,103 +238,5 @@ public class SysUser extends BaseEntity {
         return phonenumber;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
-    }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public String getLoginIp() {
-        return loginIp;
-    }
-
-    public void setLoginIp(String loginIp) {
-        this.loginIp = loginIp;
-    }
-
-    public Date getLoginDate() {
-        return loginDate;
-    }
-
-    public void setLoginDate(Date loginDate) {
-        this.loginDate = loginDate;
-    }
-
-    public SysDept getDept() {
-        return dept;
-    }
-
-    public void setDept(SysDept dept) {
-        this.dept = dept;
-    }
-
-    public List<SysRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<SysRole> roles) {
-        this.roles = roles;
-    }
-
-    public Long[] getRoleIds() {
-        return roleIds;
-    }
-
-    public void setRoleIds(Long[] roleIds) {
-        this.roleIds = roleIds;
-    }
-
-    public Long[] getPostIds() {
-        return postIds;
-    }
-
-    public void setPostIds(Long[] postIds) {
-        this.postIds = postIds;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
 }
