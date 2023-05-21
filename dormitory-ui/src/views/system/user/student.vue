@@ -94,10 +94,10 @@
         </el-row>
         <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center"/>
-          <el-table-column label="用户编号" align="center" key="userId" prop="userId" v-if="columns[0].visible"/>
-          <el-table-column label="用户名称" align="center" key="userName" prop="userName" v-if="columns[1].visible"
+          <el-table-column label="学号" align="center" key="cardNo" prop="cardNo"/>
+          <el-table-column label="用户名称" align="center" key="userName" prop="userName"
                            :show-overflow-tooltip="true"/>
-          <el-table-column label="用户昵称" align="center" key="nickName" prop="nickName" v-if="columns[2].visible"
+          <el-table-column label="用户昵称" align="center" key="nickName" prop="nickName"
                            :show-overflow-tooltip="true"/>
           <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber"
                            v-if="columns[3].visible" width="120"/>

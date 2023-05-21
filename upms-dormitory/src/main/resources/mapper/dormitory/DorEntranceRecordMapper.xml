@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code.dormitory.mapper.DorEntranceRecordMapper">
+
+    <select id="pageRecord" resultType="com.code.dormitory.domain.DorEntranceRecord">
+        select der.*,su.nick_name,db.bed_number
+        from dor_entrance_record der
+        left join sys_user su on (der.user_id = su.user_id)
+        left join dor_bed db on (db.bed_id = der.bed_id)
+        where 1 = 1
+        <if test="ew.customSqlSegment!=null and ew.customSqlSegment!=''">
+            and #{ew.customSqlSegment}
+        </if>
+    </select>
+
+    <update id="updateStudent">
+        update sys_user
+        set status='Y'
+        where user_id = #{userId}
+    </update>
+</mapper>

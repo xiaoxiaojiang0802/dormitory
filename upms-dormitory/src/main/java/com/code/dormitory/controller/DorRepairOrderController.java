@@ -3,6 +3,7 @@ package com.code.dormitory.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,31 +29,34 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/dormitory/order" )
+@RequestMapping("/dormitory/order")
 public class DorRepairOrderController extends BaseController {
 
-    private final  DorRepairOrderService dorRepairOrderService;
+    private final DorRepairOrderService dorRepairOrderService;
 
     /**
      * 查询【请填写功能名称】列表
      */
-    @GetMapping("/page" )
+    @GetMapping("/page")
+    public R<Page> page(Page page, DorRepairOrder repairOrder) {
+        return R.ok(dorRepairOrderService.page(page, Wrappers.query(repairOrder)));
+    }
 
     /**
      * 导出【请填写功能名称】列表
      */
-    @PostMapping("/export" )
+    @PostMapping("/export")
     public void export(HttpServletResponse response, DorRepairOrder dorRepairOrder) {
         List<DorRepairOrder> list = dorRepairOrderService.list(Wrappers.query(dorRepairOrder));
-        ExcelUtil<DorRepairOrder> util = new ExcelUtil<DorRepairOrder>(DorRepairOrder. class);
-        util.exportExcel(response, list, "【请填写功能名称】数据" );
+        ExcelUtil<DorRepairOrder> util = new ExcelUtil<DorRepairOrder>(DorRepairOrder.class);
+        util.exportExcel(response, list, "【请填写功能名称】数据");
     }
 
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @GetMapping(value = "getById/{repairId}" )
-    public R getById(@PathVariable("repairId" ) Long repairId) {
+    @GetMapping(value = "getById/{repairId}")
+    public R getById(@PathVariable("repairId") Long repairId) {
         return R.ok(dorRepairOrderService.getById(repairId));
     }
 
@@ -75,8 +79,8 @@ public class DorRepairOrderController extends BaseController {
     /**
      * 删除【请填写功能名称】
      */
-    @DeleteMapping("/removeByIds/{ids}" )
-    public R removeByIds(@PathVariable("ids" ) List<Long> ids) {
+    @DeleteMapping("/removeByIds/{ids}")
+    public R removeByIds(@PathVariable("ids") List<Long> ids) {
         return R.ok(dorRepairOrderService.removeByIds(ids));
     }
 }

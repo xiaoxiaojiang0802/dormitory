@@ -111,7 +111,7 @@ public class SysUser extends BaseEntity {
     /**
      * 是否入住
      */
-    @Column(type = MySqlTypeConstant.CHAR, length = 1)
+    @Column(type = MySqlTypeConstant.CHAR, length = 1,defaultValue = "N")
     private String inDormitory;
 
     /**

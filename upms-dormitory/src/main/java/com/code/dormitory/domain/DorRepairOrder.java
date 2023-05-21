@@ -23,6 +23,9 @@ public class DorRepairOrder extends BaseEntity {
     @TableId
     private Long repairId;
 
+    @Column(comment = "保修人")
+    private String nickName;
+
     /**
      * 报修位置
      */

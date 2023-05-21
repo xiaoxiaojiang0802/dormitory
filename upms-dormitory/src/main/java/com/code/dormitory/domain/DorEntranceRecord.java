@@ -1,5 +1,6 @@
 package com.code.dormitory.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.code.actable.annotation.Column;
 import com.code.actable.annotation.Table;
@@ -53,4 +54,16 @@ public class DorEntranceRecord extends BaseEntity {
      */
     @Column(type = MySqlTypeConstant.CHAR, length = 1)
     private String status;
+
+    /**
+     * 学生名
+     */
+    @TableField(exist = false)
+    private String nickName;
+
+    /**
+     * 床位编号
+     */
+    @TableField(exist = false)
+    private String bedNumber;
 }

@@ -429,6 +429,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         userName: undefined,
+        userType: '00',
         phonenumber: undefined,
         status: undefined,
         deptId: undefined

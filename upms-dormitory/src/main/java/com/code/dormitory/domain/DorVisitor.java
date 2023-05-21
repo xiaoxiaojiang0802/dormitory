@@ -5,6 +5,7 @@ import com.code.actable.annotation.Column;
 import com.code.actable.annotation.Table;
 import com.code.actable.constants.MySqlTypeConstant;
 import com.code.common.core.domain.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -38,11 +39,13 @@ public class DorVisitor extends BaseEntity {
     /**
      * 来访时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(type = MySqlTypeConstant.DATETIME)
     private Date visitDate;
     /**
      * 离开时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(type = MySqlTypeConstant.DATETIME)
     private Date leaveDate;
 }

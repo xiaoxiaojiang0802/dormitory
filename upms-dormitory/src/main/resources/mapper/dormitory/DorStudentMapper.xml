@@ -9,7 +9,10 @@
         select *
         from sys_user
         where user_type = '1'
-          and nick_name like concat('%', #{searchValue}, '%')
-          and in_dormitory = 'N'
+        <if test="searchValue!= null">
+            and nick_name like concat('%', #{searchValue}, '%')
+        </if>
+        and in_dormitory = 'N'
+        order by user_id desc limit 10
     </select>
 </mapper>

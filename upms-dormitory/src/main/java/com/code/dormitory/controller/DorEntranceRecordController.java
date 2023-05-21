@@ -33,7 +33,7 @@ public class DorEntranceRecordController extends BaseController {
      */
     @GetMapping("/page")
     public R page(Page page, DorEntranceRecord dorEntranceRecord) {
-        return R.ok(dorEntranceRecordService.page(page, Wrappers.query(dorEntranceRecord)));
+        return R.ok(dorEntranceRecordService.page(page, dorEntranceRecord));
     }
 
     /**
@@ -59,7 +59,7 @@ public class DorEntranceRecordController extends BaseController {
      */
     @PostMapping
     public R add(@RequestBody DorEntranceRecord dorEntranceRecord) {
-        return R.ok(dorEntranceRecordService.addEntranceRecord(dorEntranceRecord));
+        return dorEntranceRecordService.addEntranceRecord(dorEntranceRecord);
     }
 
     /**

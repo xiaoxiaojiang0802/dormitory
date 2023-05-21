@@ -89,29 +89,32 @@
       </div>
     </el-dialog>
     <!-- 添加或修改床位对话框 -->
-    <el-dialog title="办理入住" :visible.sync="checkOpen" width="500px" append-to-body>
+    <el-dialog title="办理入住" :visible.sync="checkOpen" width="700px" append-to-body>
+      <el-form :model="userParams" ref="userForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+        <el-form-item label="" prop="searchValue">
+          <el-input v-model="userParams.searchValue" placeholder="请输入姓名或者学号"/>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" icon="el-icon-search" size="mini" @click="userQuery">搜索</el-button>
+        </el-form-item>
+      </el-form>
       <el-table v-loading="loading" :data="studentList" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="50" align="center"/>
-        <el-table-column label="学号" align="center" key="userId" prop="userId"/>
+        <el-table-column label="学号" align="center" key="cardNo" prop="cardNo"/>
         <el-table-column label="学生名称" align="center" key="nickName" prop="nickName"
                          :show-overflow-tooltip="true"/>
         <el-table-column label="性别" align="center" key="sex" prop="sex"
                          :show-overflow-tooltip="true"/>
-        <el-table-column label="操作" align="center" width="200" class-name="small-padding fixed-width">
+        <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template slot-scope="scope" v-if="scope.row.userId !== 1">
-            <el-button
-              size="mini"
-              type="text"
-              icon="el-icon-edit"
-              @click="handleUpdate(scope.row)"
-              v-hasPermi="['system:user:edit']"
-            >入住
+            <el-button size="mini" type="text" @click="inDormitory(scope.row)">
+              入住
             </el-button>
           </template>
         </el-table-column>
       </el-table>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitInForm">确 定</el-button>
+        <el-button type="primary" @click="cancelCheckOpen">确 定</el-button>
         <el-button @click="cancelCheckOpen">取 消</el-button>
       </div>
     </el-dialog>
@@ -127,6 +130,8 @@ import {
   updateBed
 } from "@/api/dormitory/bed";
 import {listDormitory} from "@/api/dormitory/dormitory";
+import {listStudent} from "@/api/dormitory/student";
+import {addRecord} from "@/api/dormitory/record";
 
 export default {
   name: "Bed",
@@ -153,7 +158,11 @@ export default {
         status: null
       },
       inForm: {},
+      userParams: {
+        searchValue: undefined
+      },
       form: {},
+      record: {},
       rules: {}
     };
   },
@@ -171,7 +180,12 @@ export default {
         this.dormitoryList = res.data;
       });
     },
-    /** 查询床位列表 */
+    inDormitory(row) {
+      this.record.userId = row.userId;
+      addRecord(this.record).then(res => {
+        this.$message.success("入住成功");
+      })
+    },
     getList() {
       this.loading = true;
       pageBed(this.queryParams).then(response => {
@@ -180,7 +194,6 @@ export default {
         this.loading = false;
       });
     },
-    // 取消按钮
     cancel() {
       this.open = false;
       this.reset();
@@ -196,12 +209,15 @@ export default {
       };
       this.resetForm("form");
     },
-    /** 搜索按钮操作 */
     handleQuery() {
       this.queryParams.pageNum = 1;
       this.getList();
     },
-    /** 重置按钮操作 */
+    userQuery() {
+      listStudent(this.userParams).then(res => {
+        this.studentList = res.data;
+      })
+    },
     resetQuery() {
       this.resetForm("queryForm");
       this.handleQuery();
@@ -212,13 +228,11 @@ export default {
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
-    /** 新增按钮操作 */
     handleAdd() {
       this.reset();
       this.open = true;
       this.title = "添加床位";
     },
-    /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
       const bedId = row.bedId || this.ids
@@ -229,12 +243,14 @@ export default {
       });
     },
     checkInOpen(row) {
+      this.record = row;
+      this.userQuery();
       this.checkOpen = true;
     },
     cancelCheckOpen() {
       this.checkOpen = false;
+      this.getList();
     },
-    /** 提交按钮 */
     submitForm() {
       this.form.dormitoryId = this.queryParams.dormitoryId;
       this.$refs["form"].validate(valid => {
@@ -275,11 +291,10 @@ export default {
         }
       });
     },
-    /** 删除按钮操作 */
     handleDelete(row) {
-      const createBys = row.createBy || this.ids;
-      this.$modal.confirm('是否确认删除床位编号为"' + createBys + '"的数据项？').then(function () {
-        return delBed(createBys);
+      const ids = row.bedId || this.ids;
+      this.$modal.confirm('是否确认删除床位编号为"' + ids + '"的数据项？').then(function () {
+        return delBed(ids);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
@@ -288,5 +303,4 @@ export default {
     },
   }
 }
-;
 </script>

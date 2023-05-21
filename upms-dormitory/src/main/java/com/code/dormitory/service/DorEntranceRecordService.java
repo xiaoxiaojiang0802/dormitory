@@ -1,5 +1,6 @@
 package com.code.dormitory.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.code.common.core.domain.R;
 import com.code.dormitory.domain.DorEntranceRecord;
@@ -12,4 +13,6 @@ import com.code.dormitory.domain.DorEntranceRecord;
  */
 public interface DorEntranceRecordService extends IService<DorEntranceRecord> {
     R<Void> addEntranceRecord(DorEntranceRecord entranceRecord);
+
+    IPage<DorEntranceRecord> page(IPage page, DorEntranceRecord entranceRecord);
 }

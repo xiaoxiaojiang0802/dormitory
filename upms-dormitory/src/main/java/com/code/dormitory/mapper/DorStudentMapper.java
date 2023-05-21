@@ -1,5 +1,8 @@
 package com.code.dormitory.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.code.actable.mapper.BaseMapperPlus;
 import com.code.common.core.domain.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;

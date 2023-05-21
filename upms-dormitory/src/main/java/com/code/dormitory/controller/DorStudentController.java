@@ -1,5 +1,6 @@
 package com.code.dormitory.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.code.common.core.controller.BaseController;
 import com.code.common.core.domain.R;
 import com.code.common.core.domain.entity.SysUser;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/dormitory/student")
 public class DorStudentController extends BaseController {
+
     private final DorStudentService studentService;
 
 

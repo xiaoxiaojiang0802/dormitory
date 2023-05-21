@@ -197,17 +197,17 @@ LOCK
 TABLES `sys_config` WRITE;
 /*!40000 ALTER TABLE `sys_config` DISABLE KEYS */;
 INSERT INTO `sys_config`
-VALUES (1, '主框架页-默认皮肤样式名称', 'sys.index.skinName', 'skin-blue', 'Y', 'admin', '2023-04-21 21:11:39', '',
+VALUES (1, '主框架页-默认皮肤样式名称', 'sys.index.skinName', 'skin-blue', 'Y', 'admin', now(), '',
         NULL, '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow'),
-       (2, '用户管理-账号初始密码', 'sys.user.initPassword', '123456', 'Y', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (2, '用户管理-账号初始密码', 'sys.user.initPassword', '123456', 'Y', 'admin', now(), '', NULL,
         '初始化密码 123456'),
-       (3, '主框架页-侧边栏主题', 'sys.index.sideTheme', 'theme-dark', 'Y', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (3, '主框架页-侧边栏主题', 'sys.index.sideTheme', 'theme-dark', 'Y', 'admin', now(), '', NULL,
         '深色主题theme-dark，浅色主题theme-light'),
-       (4, '账号自助-验证码开关', 'sys.account.captchaEnabled', 'true', 'Y', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (4, '账号自助-验证码开关', 'sys.account.captchaEnabled', 'true', 'Y', 'admin', now(), '', NULL,
         '是否开启验证码功能（true开启，false关闭）'),
-       (5, '账号自助-是否开启用户注册功能', 'sys.account.registerUser', 'true', 'Y', 'admin', '2023-04-21 21:11:39',
+       (5, '账号自助-是否开启用户注册功能', 'sys.account.registerUser', 'true', 'Y', 'admin', now(),
         'admin', '2023-04-21 21:19:41', '是否开启注册用户功能（true开启，false关闭）'),
-       (6, '用户登录-黑名单列表', 'sys.login.blackIPList', '', 'Y', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (6, '用户登录-黑名单列表', 'sys.login.blackIPList', '', 'Y', 'admin', now(), '', NULL,
         '设置登录IP黑名单限制，多个匹配项以;分隔，支持匹配（*通配、网段）');
 /*!40000 ALTER TABLE `sys_config` ENABLE KEYS */;
 UNLOCK
@@ -307,74 +307,80 @@ LOCK
 TABLES `sys_dict_data` WRITE;
 /*!40000 ALTER TABLE `sys_dict_data` DISABLE KEYS */;
 INSERT INTO `sys_dict_data`
-VALUES (1, 1, '男', '0', 'sys_user_sex', '', '', 'Y', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '性别男'),
-       (2, 2, '女', '1', 'sys_user_sex', '', '', 'N', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '性别女'),
-       (3, 3, '未知', '2', 'sys_user_sex', '', '', 'N', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '性别未知'),
-       (4, 1, '显示', '0', 'sys_show_hide', '', 'primary', 'Y', '0', 'admin', '2023-04-21 21:11:38', '', NULL,
+VALUES (1, 1, '男', '0', 'sys_user_sex', '', '', 'Y', '0', 'admin', now(), '', NULL, '性别男'),
+       (2, 2, '女', '1', 'sys_user_sex', '', '', 'N', '0', 'admin', now(), '', NULL, '性别女'),
+       (3, 3, '未知', '2', 'sys_user_sex', '', '', 'N', '0', 'admin', now(), '', NULL, '性别未知'),
+       (4, 1, '显示', '0', 'sys_show_hide', '', 'primary', 'Y', '0', 'admin', now(), '', NULL,
         '显示菜单'),
-       (5, 2, '隐藏', '1', 'sys_show_hide', '', 'danger', 'N', '0', 'admin', '2023-04-21 21:11:38', '', NULL,
+       (5, 2, '隐藏', '1', 'sys_show_hide', '', 'danger', 'N', '0', 'admin', now(), '', NULL,
         '隐藏菜单'),
-       (6, 1, '正常', '0', 'sys_normal_disable', '', 'primary', 'Y', '0', 'admin', '2023-04-21 21:11:38', '', NULL,
+       (6, 1, '正常', '0', 'sys_normal_disable', '', 'primary', 'Y', '0', 'admin', now(), '', NULL,
         '正常状态'),
-       (7, 2, '停用', '1', 'sys_normal_disable', '', 'danger', 'N', '0', 'admin', '2023-04-21 21:11:38', '', NULL,
+       (7, 2, '停用', '1', 'sys_normal_disable', '', 'danger', 'N', '0', 'admin', now(), '', NULL,
         '停用状态'),
-       (8, 1, '正常', '0', 'sys_job_status', '', 'primary', 'Y', '0', 'admin', '2023-04-21 21:11:38', '', NULL,
+       (8, 1, '正常', '0', 'sys_job_status', '', 'primary', 'Y', '0', 'admin', now(), '', NULL,
         '正常状态'),
-       (9, 2, '暂停', '1', 'sys_job_status', '', 'danger', 'N', '0', 'admin', '2023-04-21 21:11:38', '', NULL,
+       (9, 2, '暂停', '1', 'sys_job_status', '', 'danger', 'N', '0', 'admin', now(), '', NULL,
         '停用状态'),
-       (10, 1, '默认', 'DEFAULT', 'sys_job_group', '', '', 'Y', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (10, 1, '默认', 'DEFAULT', 'sys_job_group', '', '', 'Y', '0', 'admin', now(), '', NULL,
         '默认分组'),
-       (11, 2, '系统', 'SYSTEM', 'sys_job_group', '', '', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (11, 2, '系统', 'SYSTEM', 'sys_job_group', '', '', 'N', '0', 'admin', now(), '', NULL,
         '系统分组'),
-       (12, 1, '是', 'Y', 'sys_yes_no', '', 'primary', 'Y', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (12, 1, '是', 'Y', 'sys_yes_no', '', 'primary', 'Y', '0', 'admin', now(), '', NULL,
         '系统默认是'),
-       (13, 2, '否', 'N', 'sys_yes_no', '', 'danger', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL, '系统默认否'),
-       (14, 1, '通知', '1', 'sys_notice_type', '', 'warning', 'Y', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (13, 2, '否', 'N', 'sys_yes_no', '', 'danger', 'N', '0', 'admin', now(), '', NULL, '系统默认否'),
+       (14, 1, '通知', '1', 'sys_notice_type', '', 'warning', 'Y', '0', 'admin', now(), '', NULL,
         '通知'),
-       (15, 2, '公告', '2', 'sys_notice_type', '', 'success', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (15, 2, '公告', '2', 'sys_notice_type', '', 'success', 'N', '0', 'admin', now(), '', NULL,
         '公告'),
-       (16, 1, '正常', '0', 'sys_notice_status', '', 'primary', 'Y', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (16, 1, '正常', '0', 'sys_notice_status', '', 'primary', 'Y', '0', 'admin', now(), '', NULL,
         '正常状态'),
-       (17, 2, '关闭', '1', 'sys_notice_status', '', 'danger', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (17, 2, '关闭', '1', 'sys_notice_status', '', 'danger', 'N', '0', 'admin', now(), '', NULL,
         '关闭状态'),
-       (18, 99, '其他', '0', 'sys_oper_type', '', 'info', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (18, 99, '其他', '0', 'sys_oper_type', '', 'info', 'N', '0', 'admin', now(), '', NULL,
         '其他操作'),
-       (19, 1, '新增', '1', 'sys_oper_type', '', 'info', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (19, 1, '新增', '1', 'sys_oper_type', '', 'info', 'N', '0', 'admin', now(), '', NULL,
         '新增操作'),
-       (20, 2, '修改', '2', 'sys_oper_type', '', 'info', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (20, 2, '修改', '2', 'sys_oper_type', '', 'info', 'N', '0', 'admin', now(), '', NULL,
         '修改操作'),
-       (21, 3, '删除', '3', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (21, 3, '删除', '3', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', now(), '', NULL,
         '删除操作'),
-       (22, 4, '授权', '4', 'sys_oper_type', '', 'primary', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (22, 4, '授权', '4', 'sys_oper_type', '', 'primary', 'N', '0', 'admin', now(), '', NULL,
         '授权操作'),
-       (23, 5, '导出', '5', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (23, 5, '导出', '5', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', now(), '', NULL,
         '导出操作'),
-       (24, 6, '导入', '6', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (24, 6, '导入', '6', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', now(), '', NULL,
         '导入操作'),
-       (25, 7, '强退', '7', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (25, 7, '强退', '7', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', now(), '', NULL,
         '强退操作'),
-       (26, 8, '生成代码', '8', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (26, 8, '生成代码', '8', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', now(), '', NULL,
         '生成操作'),
-       (27, 9, '清空数据', '9', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (27, 9, '清空数据', '9', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', now(), '', NULL,
         '清空操作'),
-       (28, 1, '成功', '0', 'sys_common_status', '', 'primary', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (28, 1, '成功', '0', 'sys_common_status', '', 'primary', 'N', '0', 'admin', now(), '', NULL,
         '正常状态'),
-       (29, 2, '失败', '1', 'sys_common_status', '', 'danger', 'N', '0', 'admin', '2023-04-21 21:11:39', '', NULL,
+       (29, 2, '失败', '1', 'sys_common_status', '', 'danger', 'N', '0', 'admin', now(), '', NULL,
         '停用状态');
 INSERT INTO `sys_dict_data`
-VALUES (30, 1, '四人间', '1', 'dor_dormitory_type', '', 'primary', 'N', '0', 'admin', '2023-04-21 23:08:19', '', NULL,
+VALUES (30, 1, '四人间', '1', 'dor_dormitory_type', '', 'primary', 'N', '0', 'admin', now(), '', NULL,
         ''),
-       (31, 2, '六人间', '2', 'dor_dormitory_type', '', 'primary', 'N', '0', 'admin', '2023-04-21 23:08:19', '', NULL,
+       (31, 2, '六人间', '2', 'dor_dormitory_type', '', 'primary', 'N', '0', 'admin', now(), '', NULL,
         ''),
-       (32, 3, '八人间', '3', 'dor_dormitory_type', '', 'primary', 'N', '0', 'admin', '2023-04-21 23:08:19', '', NULL,
+       (32, 3, '八人间', '3', 'dor_dormitory_type', '', 'primary', 'N', '0', 'admin', now(), '', NULL,
         '');
-
 INSERT INTO `sys_dict_data`
-VALUES (33, 1, '空闲', '1', 'dor_bed_status', '', 'info', 'N', '0', 'admin', '2023-04-21 23:08:19', '', NULL,
+VALUES (33, 1, '空闲', '1', 'dor_bed_status', '', 'info', 'N', '0', 'admin', now(), '', NULL,
         ''),
-       (34, 2, '有人', '2', 'dor_bed_status', '', 'primary', 'N', '0', 'admin', '2023-04-21 23:08:19', '', NULL,
+       (34, 2, '有人', '2', 'dor_bed_status', '', 'primary', 'N', '0', 'admin', now(), '', NULL,
         ''),
-       (35, 3, '维修', '3', 'dor_bed_status', '', 'danger', 'N', '0', 'admin', '2023-04-21 23:08:19', '', NULL,
+       (35, 3, '维修', '3', 'dor_bed_status', '', 'danger', 'N', '0', 'admin', now(), '', NULL,
+        '');
+INSERT INTO `sys_dict_data`
+VALUES (36, 1, '待维修', '1', 'dor_repair_state', '', 'warning', 'N', '0', 'admin', now(), '', NULL,
+        ''),
+       (37, 2, '已维修', '2', 'dor_repair_state', '', 'primary', 'N', '0', 'admin', now(), '', NULL,
+        ''),
+       (38, 3, '关闭', '3', 'dor_repair_state', '', 'info', 'N', '0', 'admin', now(), '', NULL,
         '');
 /*!40000 ALTER TABLE `sys_dict_data` ENABLE KEYS */;
 UNLOCK
@@ -411,19 +417,21 @@ LOCK
 TABLES `sys_dict_type` WRITE;
 /*!40000 ALTER TABLE `sys_dict_type` DISABLE KEYS */;
 INSERT INTO `sys_dict_type`
-VALUES (1, '用户性别', 'sys_user_sex', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '用户性别列表'),
-       (2, '菜单状态', 'sys_show_hide', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '菜单状态列表'),
-       (3, '系统开关', 'sys_normal_disable', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '系统开关列表'),
-       (4, '任务状态', 'sys_job_status', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '任务状态列表'),
-       (5, '任务分组', 'sys_job_group', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '任务分组列表'),
-       (6, '系统是否', 'sys_yes_no', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '系统是否列表'),
-       (7, '通知类型', 'sys_notice_type', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '通知类型列表'),
-       (8, '通知状态', 'sys_notice_status', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '通知状态列表'),
-       (9, '操作类型', 'sys_oper_type', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '操作类型列表'),
-       (10, '系统状态', 'sys_common_status', '0', 'admin', '2023-04-21 21:11:38', '', NULL, '登录状态列表'),
+VALUES (1, '用户性别', 'sys_user_sex', '0', 'admin', now(), '', NULL, '用户性别列表'),
+       (2, '菜单状态', 'sys_show_hide', '0', 'admin', now(), '', NULL, '菜单状态列表'),
+       (3, '系统开关', 'sys_normal_disable', '0', 'admin', now(), '', NULL, '系统开关列表'),
+       (4, '任务状态', 'sys_job_status', '0', 'admin', now(), '', NULL, '任务状态列表'),
+       (5, '任务分组', 'sys_job_group', '0', 'admin', now(), '', NULL, '任务分组列表'),
+       (6, '系统是否', 'sys_yes_no', '0', 'admin', now(), '', NULL, '系统是否列表'),
+       (7, '通知类型', 'sys_notice_type', '0', 'admin', now(), '', NULL, '通知类型列表'),
+       (8, '通知状态', 'sys_notice_status', '0', 'admin', now(), '', NULL, '通知状态列表'),
+       (9, '操作类型', 'sys_oper_type', '0', 'admin', now(), '', NULL, '操作类型列表'),
+       (10, '系统状态', 'sys_common_status', '0', 'admin', now(), '', NULL, '登录状态列表'),
        (11, '宿舍类型', 'dor_dormitory_type', '0', 'admin', '2023-04-21 23:08:40', '', NULL, '');
 insert into sys_dict_type
 VALUES (12, '床位状态', 'dor_bed_status', '0', 'admin', now(), '', NULL, '');
+insert into sys_dict_type
+VALUES (13, '维修状态', 'dor_repair_state', '0', 'admin', now(), '', NULL, '');
 /*!40000 ALTER TABLE `sys_dict_type` ENABLE KEYS */;
 UNLOCK
 TABLES;
@@ -463,11 +471,11 @@ TABLES `sys_job` WRITE;
 /*!40000 ALTER TABLE `sys_job` DISABLE KEYS */;
 INSERT INTO `sys_job`
 VALUES (1, '系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams', '0/10 * * * * ?', '3', '1', '1', 'admin',
-        '2023-04-21 21:11:39', '', NULL, ''),
+        now(), '', NULL, ''),
        (2, '系统默认（有参）', 'DEFAULT', 'ryTask.ryParams(\'ry\')', '0/15 * * * * ?', '3', '1', '1', 'admin',
-        '2023-04-21 21:11:39', '', NULL, ''),
+        now(), '', NULL, ''),
        (3, '系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)', '0/20 * * * * ?',
-        '3', '1', '1', 'admin', '2023-04-21 21:11:39', '', NULL, '');
+        '3', '1', '1', 'admin', now(), '', NULL, '');
 /*!40000 ALTER TABLE `sys_job` ENABLE KEYS */;
 UNLOCK
 TABLES;
@@ -827,9 +835,9 @@ LOCK
 TABLES `sys_notice` WRITE;
 /*!40000 ALTER TABLE `sys_notice` DISABLE KEYS */;
 INSERT INTO `sys_notice`
-VALUES (1, '温馨提醒：2018-07-01 若依新版本发布啦', '2', _binary '新版本内容', '0', 'admin', '2023-04-21 21:11:39', '',
+VALUES (1, '温馨提醒：2018-07-01 若依新版本发布啦', '2', _binary '新版本内容', '0', 'admin', now(), '',
         NULL, '管理员'),
-       (2, '维护通知：2018-07-01 若依系统凌晨维护', '1', _binary '维护内容', '0', 'admin', '2023-04-21 21:11:39', '',
+       (2, '维护通知：2018-07-01 若依系统凌晨维护', '1', _binary '维护内容', '0', 'admin', now(), '',
         NULL, '管理员');
 /*!40000 ALTER TABLE `sys_notice` ENABLE KEYS */;
 UNLOCK

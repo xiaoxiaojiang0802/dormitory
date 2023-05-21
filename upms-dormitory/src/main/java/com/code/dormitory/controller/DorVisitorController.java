@@ -21,43 +21,46 @@ import com.code.common.utils.poi.ExcelUtil;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 【请填写功能名称】Controller
+ * 访客Controller
  *
  * @author xiaojiang
  * @date 2023-05-15
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/dormitory/visitor" )
+@RequestMapping("/dormitory/visitor")
 public class DorVisitorController extends BaseController {
 
-    private final  DorVisitorService dorVisitorService;
+    private final DorVisitorService dorVisitorService;
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询访客列表
      */
-    @GetMapping("/page" )
-
-    /**
-     * 导出【请填写功能名称】列表
-     */
-    @PostMapping("/export" )
-    public void export(HttpServletResponse response, DorVisitor dorVisitor) {
-        List<DorVisitor> list = dorVisitorService.list(Wrappers.query(dorVisitor));
-        ExcelUtil<DorVisitor> util = new ExcelUtil<DorVisitor>(DorVisitor. class);
-        util.exportExcel(response, list, "【请填写功能名称】数据" );
+    @GetMapping("/page")
+    public R<Page> page(Page page, DorVisitor dorVisitor) {
+        return R.ok(dorVisitorService.page(page, Wrappers.query(dorVisitor)));
     }
 
     /**
-     * 获取【请填写功能名称】详细信息
+     * 导出访客列表
      */
-    @GetMapping(value = "getById/{visitorId}" )
-    public R getById(@PathVariable("visitorId" ) Long visitorId) {
+    @PostMapping("/export")
+    public void export(HttpServletResponse response, DorVisitor dorVisitor) {
+        List<DorVisitor> list = dorVisitorService.list(Wrappers.query(dorVisitor));
+        ExcelUtil<DorVisitor> util = new ExcelUtil<DorVisitor>(DorVisitor.class);
+        util.exportExcel(response, list, "访客数据");
+    }
+
+    /**
+     * 获取访客详细信息
+     */
+    @GetMapping(value = "getById/{visitorId}")
+    public R getById(@PathVariable("visitorId") Long visitorId) {
         return R.ok(dorVisitorService.getById(visitorId));
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增访客
      */
     @PostMapping
     public R add(@RequestBody DorVisitor dorVisitor) {
@@ -65,7 +68,7 @@ public class DorVisitorController extends BaseController {
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改访客
      */
     @PutMapping
     public R edit(@RequestBody DorVisitor dorVisitor) {
@@ -73,10 +76,10 @@ public class DorVisitorController extends BaseController {
     }
 
     /**
-     * 删除【请填写功能名称】
+     * 删除访客
      */
-    @DeleteMapping("/removeByIds/{ids}" )
-    public R removeByIds(@PathVariable("ids" ) List<Long> ids) {
+    @DeleteMapping("/removeByIds/{ids}")
+    public R removeByIds(@PathVariable("ids") List<Long> ids) {
         return R.ok(dorVisitorService.removeByIds(ids));
     }
 }

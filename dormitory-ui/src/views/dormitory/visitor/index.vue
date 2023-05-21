@@ -1,18 +1,18 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="" prop="name">
+      <el-form-item label="访客姓名" prop="name">
         <el-input
           v-model="queryParams.name"
-          placeholder="请输入"
+          placeholder="请输入访客姓名"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="" prop="phone">
+      <el-form-item label="联系电话" prop="phone">
         <el-input
           v-model="queryParams.phone"
-          placeholder="请输入"
+          placeholder="请输入联系电话"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -43,19 +43,15 @@
           删除
         </el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini"
-                   @click="handleExport" v-hasPermi="['dormitory:visitor:export']">
-          导出
-        </el-button>
-      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="visitorList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column label="" align="center" prop="name"/>
-      <el-table-column label="" align="center" prop="phone"/>
+      <el-table-column label="访客" align="center" prop="name"/>
+      <el-table-column label="电话" align="center" prop="phone"/>
+      <el-table-column label="来访时间" align="center" prop="visitDate"/>
+      <el-table-column label="离开时间" align="center" prop="leaveDate"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -89,11 +85,29 @@
     <!-- 添加或修改访客对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="" prop="name">
-          <el-input v-model="form.name" placeholder="请输入"/>
+        <el-form-item label="访客" prop="name">
+          <el-input v-model="form.name" placeholder="请输入访客"/>
         </el-form-item>
-        <el-form-item label="" prop="phone">
-          <el-input v-model="form.phone" placeholder="请输入"/>
+        <el-form-item label="联系电话" prop="phone">
+          <el-input v-model="form.phone" placeholder="请输入联系电话"/>
+        </el-form-item>
+        <el-form-item label="来访时间" prop="visitDate">
+          <el-date-picker
+            v-model="form.visitDate"
+            align="right"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择来访时间">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="离开时间" prop="leaveDate">
+          <el-date-picker
+            v-model="form.leaveDate"
+            align="right"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择离开时间">
+          </el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -189,8 +203,8 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const createBy = row.createBy || this.ids
-      getVisitor(createBy).then(response => {
+      const visitorId = row.visitorId || this.ids
+      getVisitor(visitorId).then(response => {
         this.form = response.data;
         this.open = true;
         this.title = "修改访客";
@@ -200,7 +214,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.createBy != null) {
+          if (this.form.visitorId != null) {
             updateVisitor(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
@@ -218,9 +232,9 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const createBys = row.createBy || this.ids;
-      this.$modal.confirm('是否确认删除访客编号为"' + createBys + '"的数据项？').then(function () {
-        return delVisitor(createBys);
+      const visitorId = row.visitorId || this.ids;
+      this.$modal.confirm('是否确认删除访客编号为"' + visitorId + '"的数据项？').then(function () {
+        return delVisitor(visitorId);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
