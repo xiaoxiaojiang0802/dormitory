@@ -47,7 +47,7 @@ public class DorVisitorController extends BaseController {
     @PostMapping("/export")
     public void export(HttpServletResponse response, DorVisitor dorVisitor) {
         List<DorVisitor> list = dorVisitorService.list(Wrappers.query(dorVisitor));
-        ExcelUtil<DorVisitor> util = new ExcelUtil<DorVisitor>(DorVisitor.class);
+        ExcelUtil<DorVisitor> util = new ExcelUtil<>(DorVisitor.class);
         util.exportExcel(response, list, "访客数据");
     }
 
