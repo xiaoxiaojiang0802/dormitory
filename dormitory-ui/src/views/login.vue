@@ -47,9 +47,6 @@
       </el-form-item>
     </el-form>
     <!--  底部  -->
-    <div class="el-login-footer">
-      <span>Copyright © 2023-now online-study All Rights Reserved.</span>
-    </div>
   </div>
 </template>
 
