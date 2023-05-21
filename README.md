@@ -15,4 +15,4 @@
 
 ## 感谢
 
-[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue) 提供底层基础服务
+[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)
