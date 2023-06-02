@@ -200,6 +200,8 @@
             <groupId>com.cdmzl</groupId>
             <artifactId>auto-table</artifactId>
             <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/auto-table-1.0.0.jar</systemPath>
         </dependency>
     </dependencies>
 
