@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>dormitory</artifactId>
-        <groupId>com.code</groupId>
+        <groupId>com.cdmzl</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -23,13 +23,6 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional> <!-- 表示依赖不会传递 -->
         </dependency>
-
-        <!-- swagger3-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-        </dependency>
-
         <!-- 防止进入swagger页面报类型转换错误，排除3.0.0中的引用，手动增加1.6.2版本 -->
         <dependency>
             <groupId>io.swagger</groupId>
@@ -43,12 +36,16 @@
         </dependency>
         <!-- 核心模块-->
         <dependency>
-            <groupId>com.code</groupId>
+            <groupId>com.cdmzl</groupId>
             <artifactId>framework</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.code</groupId>
+            <groupId>com.cdmzl</groupId>
             <artifactId>upms-dormitory</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cdmzl</groupId>
+            <artifactId>upms-system</artifactId>
         </dependency>
 
     </dependencies>

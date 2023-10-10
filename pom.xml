@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.code</groupId>
+    <groupId>com.cdmzl</groupId>
     <artifactId>dormitory</artifactId>
     <version>1.0.0</version>
 
@@ -15,48 +15,35 @@
         <dormitory.version>1.0.0</dormitory.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>8</java.version>
-        <spring.boot.version>2.5.14</spring.boot.version>
-        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <druid.version>1.2.16</druid.version>
-        <bitwalker.version>1.21</bitwalker.version>
-        <swagger.version>3.0.0</swagger.version>
-        <kaptcha.version>2.3.3</kaptcha.version>
-        <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
-        <fastjson.version>2.0.23</fastjson.version>
-        <oshi.version>6.4.0</oshi.version>
-        <commons.io.version>2.11.0</commons.io.version>
-        <commons.collections.version>3.2.2</commons.collections.version>
-        <poi.version>4.1.2</poi.version>
-        <velocity.version>2.3</velocity.version>
-        <jwt.version>0.9.1</jwt.version>
-        <hutool.version>5.8.11</hutool.version>
-        <knife4j.version>3.0.3</knife4j.version>
-        <p6spy.version>3.9.1</p6spy.version>
+        <spring-boot.version>2.7.3</spring-boot.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+        <druid.version>1.2.12</druid.version>
+        <springdoc.version>1.6.11</springdoc.version>
         <poi.version>5.2.2</poi.version>
-        <xdocreport.version>1.0.6</xdocreport.version>
-        <xstream.version>1.4.20</xstream.version>
-        <junrar.version>7.5.4</junrar.version>
-        <redisson.version>3.2.0</redisson.version>
-        <sevenzipjbinding.version>16.02-2.01</sevenzipjbinding.version>
-        <jchardet.version>1.0</jchardet.version>
-        <antlr.version>2.7.7</antlr.version>
-        <concurrentlinkedhashmap.version>1.4.2</concurrentlinkedhashmap.version>
-        <rocksdb.version>5.17.2</rocksdb.version>
-        <pdfbox.version>2.0.27</pdfbox.version>
-        <jai-imageio.version>1.4.0</jai-imageio.version>
-        <jbig2-imageio.version>3.0.4</jbig2-imageio.version>
-        <galimatias.version>0.2.1</galimatias.version>
-        <bytedeco.version>1.5.2</bytedeco.version>
-        <opencv.version>4.1.2-1.5.2</opencv.version>
-        <openblas.version>0.3.6-1.5.1</openblas.version>
-        <ffmpeg.version>4.2.1-1.5.2</ffmpeg.version>
-        <itextpdf.version>5.5.13.3</itextpdf.version>
-        <httpclient.version>3.1</httpclient.version>
-        <commons-cli.version>1.2</commons-cli.version>
-        <commons-net.version>3.6</commons-net.version>
-        <commons-lang3.version>3.7</commons-lang3.version>
-        <jodconverter.version>4.4.6</jodconverter.version>
+        <easyexcel.version>3.1.1</easyexcel.version>
+        <satoken.version>1.30.0</satoken.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <p6spy.version>3.9.1</p6spy.version>
+        <hutool.version>5.8.6</hutool.version>
+        <okhttp.version>4.10.0</okhttp.version>
+        <lock4j.version>2.2.2</lock4j.version>
+        <dynamic-ds.version>3.5.2</dynamic-ds.version>
+        <tlog.version>1.4.3</tlog.version>
+        <xxl-job.version>2.3.1</xxl-job.version>
+        <lombok.version>1.18.24</lombok.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <swagger-annotations.version>1.5.22</swagger-annotations.version>
+        <knife4j.version>4.0.0</knife4j.version>
+        <!-- 统一 guava 版本 解决隐式漏洞问题 -->
+        <guava.version>31.1-jre</guava.version>
+        <!-- OSS 配置 -->
+        <aws-java-sdk-s3.version>1.12.300</aws-java-sdk-s3.version>
+        <!-- SMwS 配置 -->
+        <aliyun.sms.version>2.0.18</aliyun.sms.version>
+        <tencent.sms.version>3.1.591</tencent.sms.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -66,9 +53,40 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-annotations</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger-annotations.version}</version>
             </dependency>
             <!-- hutool 的依赖配置-->
             <dependency>
@@ -78,11 +96,92 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!-- 阿里数据库连接池 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-webmvc-core</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-javadoc</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.poi</groupId>
+                        <artifactId>poi-ooxml-schemas</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- Sa-Token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${satoken.version}</version>
+            </dependency>
+            <!-- Sa-Token 整合 jwt -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-jwt</artifactId>
+                <version>${satoken.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>cn.hutool</groupId>
+                        <artifactId>hutool-all</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- dynamic-datasource 多数据源-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic-ds.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
             <!-- sql性能分析插件 -->
             <dependency>
@@ -90,152 +189,113 @@
                 <artifactId>p6spy</artifactId>
                 <version>${p6spy.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>${aws-java-sdk-s3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>dysmsapi20170525</artifactId>
+                <version>${aliyun.sms.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java</artifactId>
+                <version>${tencent.sms.version}</version>
+            </dependency>
+            <!-- xxl-job-core -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
 
             <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-boot-starter</artifactId>
-                <version>${knife4j.version}</version>
+                <groupId>com.yomahub</groupId>
+                <artifactId>tlog-web-spring-boot-starter</artifactId>
+                <version>${tlog.version}</version>
                 <exclusions>
                     <exclusion>
-                        <artifactId>swagger-annotations</artifactId>
-                        <groupId>io.swagger</groupId>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>dom4j</artifactId>
+                        <groupId>dom4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>commons-beanutils</artifactId>
+                        <groupId>commons-beanutils</groupId>
                     </exclusion>
                 </exclusions>
             </dependency>
-            <!-- 解析客户端操作系统、浏览器等 -->
             <dependency>
-                <groupId>eu.bitwalker</groupId>
-                <artifactId>UserAgentUtils</artifactId>
-                <version>${bitwalker.version}</version>
+                <groupId>com.yomahub</groupId>
+                <artifactId>tlog-xxljob-spring-boot-starter</artifactId>
+                <version>${tlog.version}</version>
             </dependency>
-
-            <!-- pagehelper 分页插件 -->
+            <!-- 统一 guava 版本 解决隐式漏洞问题 -->
             <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper.boot.version}</version>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
-
-            <!-- 获取系统信息 -->
-            <dependency>
-                <groupId>com.github.oshi</groupId>
-                <artifactId>oshi-core</artifactId>
-                <version>${oshi.version}</version>
-            </dependency>
-
-            <!-- Swagger3依赖 -->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>${swagger.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>io.swagger</groupId>
-                        <artifactId>swagger-models</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <!-- io常用工具类 -->
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons.io.version}</version>
-            </dependency>
-
-            <!-- excel工具 -->
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>${poi.version}</version>
-            </dependency>
-
-            <!-- velocity代码生成使用模板 -->
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity-engine-core</artifactId>
-                <version>${velocity.version}</version>
-            </dependency>
-
-            <!-- collections工具类 -->
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>${commons.collections.version}</version>
-            </dependency>
-
-            <!-- 阿里JSON解析器 -->
-            <dependency>
-                <groupId>com.alibaba.fastjson2</groupId>
-                <artifactId>fastjson2</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
-
-            <!-- Token生成与解析-->
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>${jwt.version}</version>
-            </dependency>
-
-            <!-- 验证码 -->
-            <dependency>
-                <groupId>pro.fessional</groupId>
-                <artifactId>kaptcha</artifactId>
-                <version>${kaptcha.version}</version>
-            </dependency>
-
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.code</groupId>
+                <groupId>com.cdmzl</groupId>
                 <artifactId>quartz</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
-
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.code</groupId>
+                <groupId>com.cdmzl</groupId>
                 <artifactId>generator</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
             <!-- 项目管理-->
             <dependency>
-                <groupId>com.code</groupId>
+                <groupId>com.cdmzl</groupId>
                 <artifactId>pm-api</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.code</groupId>
+                <groupId>com.cdmzl</groupId>
                 <artifactId>pm-biz</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.code</groupId>
+                <groupId>com.cdmzl</groupId>
                 <artifactId>file-view</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.code</groupId>
+                <groupId>com.cdmzl</groupId>
                 <artifactId>framework</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.code</groupId>
+                <groupId>com.cdmzl</groupId>
                 <artifactId>upms-system</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.code</groupId>
+                <groupId>com.cdmzl</groupId>
                 <artifactId>common</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.code</groupId>
+                <groupId>com.cdmzl</groupId>
                 <artifactId>upms-dormitory</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>

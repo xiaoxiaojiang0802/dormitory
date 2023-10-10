@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>dormitory</artifactId>
-        <groupId>com.code</groupId>
+        <groupId>com.cdmzl</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -16,11 +16,21 @@
     </description>
 
     <dependencies>
-
         <!-- SpringBoot Web容器 -->
-         <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- web 容器使用 undertow 性能更强 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
 
         <!-- SpringBoot 拦截器 -->
@@ -28,53 +38,43 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!-- 防止进入swagger页面报类型转换错误，排除3.0.0中的引用，手动增加1.6.2版本 -->
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-models</artifactId>
-            <version>1.6.2</version>
-        </dependency>
 
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
-        </dependency>
         <!-- 阿里数据库连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- 验证码 -->
+        <!-- sql性能分析插件 -->
         <dependency>
-            <groupId>pro.fessional</groupId>
-            <artifactId>kaptcha</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>javax.servlet-api</artifactId>
-                    <groupId>javax.servlet</groupId>
-                </exclusion>
-            </exclusions>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
         </dependency>
 
-        <!-- 获取系统信息 -->
         <dependency>
-            <groupId>com.github.oshi</groupId>
-            <artifactId>oshi-core</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <!-- 系统模块-->
         <dependency>
-            <groupId>com.code</groupId>
-            <artifactId>upms-system</artifactId>
+            <groupId>com.cdmzl</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yomahub</groupId>
+            <artifactId>tlog-web-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- ehcache依赖 -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-http</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
     </dependencies>
