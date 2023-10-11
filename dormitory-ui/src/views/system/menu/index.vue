@@ -77,7 +77,7 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button 
+          <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
@@ -198,7 +198,7 @@
             <el-form-item prop="perms">
               <el-input v-model="form.perms" placeholder="请输入权限标识" maxlength="100" />
               <span slot="label">
-                <el-tooltip content="控制器中定义的权限字符，如：@PreAuthorize(`@ss.hasPermi('system:user:list')`)" placement="top">
+                <el-tooltip content="控制器中定义的权限字符，如：@SaCheckPermission('system:user:list')" placement="top">
                 <i class="el-icon-question"></i>
                 </el-tooltip>
                 权限字符
@@ -206,8 +206,8 @@
             </el-form-item>
           </el-col>
           <el-col :span="12" v-if="form.menuType == 'C'">
-            <el-form-item prop="query">
-              <el-input v-model="form.query" placeholder="请输入路由参数" maxlength="255" />
+            <el-form-item prop="queryParam">
+              <el-input v-model="form.queryParam" placeholder="请输入路由参数" maxlength="255" />
               <span slot="label">
                 <el-tooltip content='访问路由的默认传递参数，如：`{"id": 1, "name": "ry"}`' placement="top">
                 <i class="el-icon-question"></i>

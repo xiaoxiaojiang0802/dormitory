@@ -135,7 +135,9 @@
             v-hasPermi="['system:role:remove']"
           >删除</el-button>
           <el-dropdown size="mini" @command="(command) => handleCommand(command, scope.row)" v-hasPermi="['system:role:edit']">
-            <el-button size="mini" type="text" icon="el-icon-d-arrow-right">更多</el-button>
+            <span class="el-dropdown-link">
+              <i class="el-icon-d-arrow-right el-icon--right"></i>更多
+            </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="handleDataScope" icon="el-icon-circle-check"
                 v-hasPermi="['system:role:edit']">数据权限</el-dropdown-item>
@@ -356,7 +358,7 @@ export default {
       );
     },
     /** 查询菜单树结构 */
-    getMenuTreeselect() {
+    getMenuTreeSelect() {
       menuTreeselect().then(response => {
         this.menuOptions = response.data;
       });
@@ -382,14 +384,14 @@ export default {
     /** 根据角色ID查询菜单树结构 */
     getRoleMenuTreeselect(roleId) {
       return roleMenuTreeselect(roleId).then(response => {
-        this.menuOptions = response.menus;
+        this.menuOptions = response.data.menus;
         return response;
       });
     },
     /** 根据角色ID查询部门树结构 */
     getDeptTree(roleId) {
       return deptTreeSelect(roleId).then(response => {
-        this.deptOptions = response.depts;
+        this.deptOptions = response.data.depts;
         return response;
       });
     },
@@ -500,7 +502,7 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();
-      this.getMenuTreeselect();
+      this.getMenuTreeSelect();
       this.open = true;
       this.title = "添加角色";
     },
@@ -514,7 +516,7 @@ export default {
         this.open = true;
         this.$nextTick(() => {
           roleMenu.then(res => {
-            let checkedKeys = res.checkedKeys
+            let checkedKeys = res.data.checkedKeys
             checkedKeys.forEach((v) => {
                 this.$nextTick(()=>{
                     this.$refs.menu.setChecked(v, true ,false);
@@ -540,7 +542,7 @@ export default {
         this.openDataScope = true;
         this.$nextTick(() => {
           deptTreeSelect.then(res => {
-            this.$refs.dept.setCheckedKeys(res.checkedKeys);
+            this.$refs.dept.setCheckedKeys(res.data.checkedKeys);
           });
         });
         this.title = "分配数据权限";
@@ -603,3 +605,4 @@ export default {
   }
 };
 </script>
+

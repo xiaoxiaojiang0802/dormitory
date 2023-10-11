@@ -1,7 +1,7 @@
 <template>
   <div class="register">
     <el-form ref="registerForm" :model="registerForm" :rules="registerRules" class="register-form">
-      <h3 class="title">宿舍管理系统</h3>
+      <h3 class="title">职工人事OA管理系统</h3>
       <el-form-item prop="username">
         <el-input v-model="registerForm.username" type="text" auto-complete="off" placeholder="账号">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
@@ -13,7 +13,8 @@
           type="password"
           auto-complete="off"
           placeholder="密码"
-          @keyup.enter.native="handleRegister">
+          @keyup.enter.native="handleRegister"
+        >
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
@@ -27,12 +28,6 @@
         >
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
         </el-input>
-      </el-form-item>
-      <el-form-item prop="userType">
-        <el-radio-group v-model="registerForm.userType">
-          <el-radio label="0" style="margin:0px 0px 5px 0px;">教师</el-radio>
-          <el-radio label="1" style="margin:0px 0px 5px 15px;">学生</el-radio>
-        </el-radio-group>
       </el-form-item>
       <el-form-item prop="code" v-if="captchaEnabled">
         <el-input
@@ -65,6 +60,8 @@
       </el-form-item>
     </el-form>
     <!--  底部  -->
+    <div class="el-register-footer">
+    </div>
   </div>
 </template>
 
@@ -88,7 +85,8 @@ export default {
         password: "",
         confirmPassword: "",
         code: "",
-        uuid: ""
+        uuid: "",
+        user_type: "sys_user"
       },
       registerRules: {
         username: [
@@ -115,10 +113,10 @@ export default {
   methods: {
     getCode() {
       getCodeImg().then(res => {
-        this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled;
+        this.captchaEnabled = res.data.captchaEnabled === undefined ? true : res.data.captchaEnabled;
         if (this.captchaEnabled) {
-          this.codeUrl = "data:image/gif;base64," + res.img;
-          this.registerForm.uuid = res.uuid;
+          this.codeUrl = "data:image/gif;base64," + res.data.img;
+          this.registerForm.uuid = res.data.uuid;
         }
       });
     },
@@ -126,7 +124,9 @@ export default {
       this.$refs.registerForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          register(this.registerForm).then(res => {
+          let registerForm = this.registerForm;
+          registerForm.userType = "sys_user"
+          register(registerForm).then(res => {
             const username = this.registerForm.username;
             this.$alert("<font color='red'>恭喜你，您的账号 " + username + " 注册成功！</font>", '系统提示', {
               dangerouslyUseHTMLString: true,

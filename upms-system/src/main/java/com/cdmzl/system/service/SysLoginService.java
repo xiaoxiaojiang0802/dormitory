@@ -76,7 +76,6 @@ public class SysLoginService {
         LoginUser loginUser = buildLoginUser(user);
         // 生成token
         LoginHelper.loginByDevice(loginUser, DeviceType.PC);
-
         asyncService.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"), request);
         recordLoginInfo(user.getUserId(), username);
         return StpUtil.getTokenValue();

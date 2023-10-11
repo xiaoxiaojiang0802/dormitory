@@ -39,6 +39,7 @@ export default {
     }
   },
   mounted() {
+    this.insertToBody()
     this.addEventClick()
   },
   beforeDestroy() {
@@ -55,6 +56,11 @@ export default {
         this.show = false
         window.removeEventListener('click', this.closeSidebar)
       }
+    },
+    insertToBody() {
+      const elx = this.$refs.rightPanel
+      const body = document.querySelector('body')
+      body.insertBefore(elx, body.firstChild)
     }
   }
 }

@@ -100,6 +100,16 @@ export function updateUserPwd(oldPassword, newPassword) {
   })
 }
 
+
+// 查询用户列表
+export function selectSelectUser(query) {
+  return request({
+    url: '/system/user/selectSelectUser',
+    method: 'get',
+    params: query
+  })
+}
+
 // 用户头像上传
 export function uploadAvatar(data) {
   return request({

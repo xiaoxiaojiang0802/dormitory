@@ -12,9 +12,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @EnableScheduling
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-public class Application {
+public class DorApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(DorApplication.class, args);
         System.out.println("(♥◠‿◠)ﾉﾞ  宿舍管理启动成功   ლ(´ڡ`ლ)ﾞ  ");
     }
 }

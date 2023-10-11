@@ -7,16 +7,16 @@
           :key="item.value"
           :index="index"
           :class="item.raw.cssClass"
-          >{{ item.label }}</span
+        >{{ item.label }}</span
         >
         <el-tag
           v-else
           :disable-transitions="true"
           :key="item.value"
           :index="index"
+          :size="size"
           :type="item.raw.listClass == 'primary' ? '' : item.raw.listClass"
-          :class="item.raw.cssClass"
-        >
+          :class="item.raw.cssClass">
           {{ item.label }}
         </el-tag>
       </template>
@@ -32,6 +32,7 @@ export default {
       type: Array,
       default: null,
     },
+    size: String,
     value: [Number, String, Array],
   },
   computed: {

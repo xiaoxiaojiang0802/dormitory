@@ -4,9 +4,11 @@ import Cookies from 'js-cookie'
 
 import Element from 'element-ui'
 import './assets/styles/element-variables.scss'
+import Avue from '@smallwei/avue';
+import '@smallwei/avue/lib/index.css';
 
 import '@/assets/styles/index.scss' // global css
-import '@/assets/styles/ruoyi.scss' // ruoyi css
+import '@/assets/styles/ken-li.scss' // ken-li css
 import App from './App'
 import store from './store'
 import router from './router'
@@ -17,7 +19,7 @@ import { download } from '@/utils/request'
 import './assets/icons' // icon
 import './permission' // permission control
 import { getDicts } from "@/api/system/dict/data";
-import { getConfigKey } from "@/api/system/config";
+import { getConfigKey, updateConfigByKey } from "@/api/system/config";
 import { parseTime, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree } from "@/utils/ruoyi";
 // 分页组件
 import Pagination from "@/components/Pagination";
@@ -41,6 +43,7 @@ import DictData from '@/components/DictData'
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getConfigKey = getConfigKey
+Vue.prototype.updateConfigByKey = updateConfigByKey
 Vue.prototype.parseTime = parseTime
 Vue.prototype.resetForm = resetForm
 Vue.prototype.addDateRange = addDateRange
@@ -57,20 +60,15 @@ Vue.component('Editor', Editor)
 Vue.component('FileUpload', FileUpload)
 Vue.component('ImageUpload', ImageUpload)
 Vue.component('ImagePreview', ImagePreview)
+Vue.use(Avue);
 
 Vue.use(directive)
 Vue.use(plugins)
 Vue.use(VueMeta)
 DictData.install()
 
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online! ! !
- */
+// 修改 el-dialog 默认点击遮照为不关闭
+Element.Dialog.props.closeOnClickModal.default = false
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
