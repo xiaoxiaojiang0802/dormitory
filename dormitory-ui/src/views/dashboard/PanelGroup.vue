@@ -7,7 +7,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            客人
+            人数
           </div>
           <count-to :start-val="0" :end-val="indexVo.personCount" :duration="2600" class="card-panel-num"/>
         </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            空房
+            消息
           </div>
           <count-to :start-val="0" :end-val="indexVo.spareRoom" :duration="3000" class="card-panel-num"/>
         </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            金额
+            维修
           </div>
           <count-to :start-val="0" :end-val="indexVo.turnover" :duration="3200" class="card-panel-num"/>
         </div>
@@ -46,7 +46,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            订单
+            维保
           </div>
           <count-to :start-val="0" :end-val="indexVo.orderCount" :duration="3600" class="card-panel-num"/>
         </div>
