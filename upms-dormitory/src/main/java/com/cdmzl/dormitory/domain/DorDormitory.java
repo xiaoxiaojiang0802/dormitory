@@ -46,13 +46,13 @@ public class DorDormitory extends BaseEntity {
      * 楼层
      */
     @Column(comment = "楼层")
-    private Integer floor;
+    private Integer inFloor;
 
 
     /**
      * 是否满员bool
      */
     @Column(type = MySqlTypeConstant.CHAR, length = 2, defaultValue = "N", comment = "是否满员bool")
-    private String full;
+    private String atFull;
 
 }
