@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>framework</artifactId>
+    <artifactId>ruoyi-framework</artifactId>
 
     <description>
         framework框架核心
@@ -59,7 +59,7 @@
         <!-- 系统模块-->
         <dependency>
             <groupId>com.cdmzl</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>ruoyi-common</artifactId>
         </dependency>
 
         <dependency>

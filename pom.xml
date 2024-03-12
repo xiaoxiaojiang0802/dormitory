@@ -277,56 +277,41 @@
             <!-- 核心模块-->
             <dependency>
                 <groupId>com.cdmzl</groupId>
-                <artifactId>framework</artifactId>
+                <artifactId>ruoyi-framework</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
                 <groupId>com.cdmzl</groupId>
-                <artifactId>upms-system</artifactId>
+                <artifactId>ruoyi-system</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.cdmzl</groupId>
-                <artifactId>common</artifactId>
+                <artifactId>ruoyi-common</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cdmzl</groupId>
-                <artifactId>upms-dormitory</artifactId>
+                <artifactId>ruoyi-dormitory</artifactId>
                 <version>${dormitory.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <modules>
-        <module>admin</module>
-        <module>framework</module>
-        <module>upms-system</module>
-        <module>common</module>
-        <module>upms-dormitory</module>
+        <module>ruoyi-admin</module>
+        <module>ruoyi-framework</module>
+        <module>ruoyi-system</module>
+        <module>ruoyi-common</module>
+        <module>ruoyi-dormitory</module>
     </modules>
     <packaging>pom</packaging>
 
-
-    <dependencies>
-
-    </dependencies>
-
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**.*</include>
-                    <include>**/**.*</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <!-- 打包插件 -->
             <plugin>

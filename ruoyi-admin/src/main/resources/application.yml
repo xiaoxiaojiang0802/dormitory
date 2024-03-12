@@ -5,7 +5,7 @@ ruoyi:
   # 版本
   version: ${dormitory.version}
   # 版权年份
-  copyrightYear: 2022
+  copyrightYear: 2024
   # 实例演示开关
   demoEnabled: true
   # 获取ip地址开关
@@ -70,7 +70,7 @@ spring:
     # 国际化资源文件路径
     basename: i18n/messages
   profiles:
-    active: @profiles.active@
+    active: dev
   # 文件上传
   servlet:
     multipart:
@@ -199,7 +199,7 @@ swagger:
     # 描述
     description: '描述：便于开发使用接口文档管理'
     # 版本
-    version: '版本号: ${ruoyi.version}'
+    version: '版本号: ${dormitory.version}'
     # 作者信息
     contact:
       name: Jiang Jin

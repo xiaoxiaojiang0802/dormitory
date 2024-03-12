@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>upms-system</artifactId>
+    <artifactId>ruoyi-system</artifactId>
 
     <description>
         system系统模块
@@ -20,7 +20,7 @@
         <!-- 通用工具-->
         <dependency>
             <groupId>com.cdmzl</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>ruoyi-common</artifactId>
         </dependency>
         <dependency>
             <groupId>io.swagger</groupId>
