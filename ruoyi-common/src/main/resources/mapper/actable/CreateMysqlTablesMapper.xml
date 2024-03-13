@@ -138,9 +138,9 @@
             create table `${key}`(
             <foreach collection="value.list" item="fields" separator=",">
                 <include refid="commonSql"/>
-                <!--                <if test="fields.fieldIsKey">-->
-                <!--                    ,PRIMARY KEY (`${fields.fieldName}`)-->
-                <!--                </if>-->
+                                <if test="fields.fieldIsKey">
+                                    ,PRIMARY KEY (`${fields.fieldName}`)
+                                </if>
             </foreach>
             <if test="value.keyList!=null">
                 ,PRIMARY KEY
@@ -186,9 +186,9 @@
         <foreach collection="tableMap" index="key" item="fields" separator=";">
             alter table `${key}` add
             <include refid="commonSql"/>
-            <!--            <if test="fields.fieldIsKey">-->
-            <!--                PRIMARY KEY-->
-            <!--            </if>-->
+            <if test="fields.fieldIsKey">
+                PRIMARY KEY
+            </if>
         </foreach>
 
     </select>
@@ -224,9 +224,9 @@
         <foreach collection="tableMap" index="key" item="fields" separator=";">
             alter table `${key}` modify
             <include refid="commonSql"/>
-            <!--            <if test="fields.fieldIsKey">-->
-            <!--                PRIMARY KEY-->
-            <!--            </if>-->
+                        <if test="fields.fieldIsKey">
+                            PRIMARY KEY
+                        </if>
         </foreach>
 
     </select>
@@ -235,7 +235,7 @@
         <foreach collection="tableMap" index="key" item="fields" separator=";">
             alter table `${key}` modify
             <include refid="commonSql"/>
---             ,drop primary key
+            ,drop primary key
         </foreach>
     </select>
     <!-- 验证表是否存在 -->

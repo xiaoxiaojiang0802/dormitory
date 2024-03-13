@@ -2,6 +2,8 @@ package com.cdmzl.system.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cdmzl.common.actable.annotation.Column;
+import com.cdmzl.common.actable.annotation.Index;
+import com.cdmzl.common.actable.annotation.Unique;
 import lombok.Data;
 
 /**
@@ -17,13 +19,13 @@ public class SysUserPost {
     /**
      * 用户ID
      */
-    @Column(isKey = true)
+    @Index
     private Long userId;
 
     /**
      * 岗位ID
      */
-    @Column(isKey = true)
+    @Index
     private Long postId;
 
 }

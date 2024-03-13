@@ -2,6 +2,7 @@ package com.cdmzl.system.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cdmzl.common.actable.annotation.Column;
+import com.cdmzl.common.actable.annotation.Unique;
 import lombok.Data;
 
 /**
@@ -17,13 +18,13 @@ public class SysRoleDept {
     /**
      * 角色ID
      */
-    @Column(isNull = false)
+    @Unique
     private Long roleId;
 
     /**
      * 部门ID
      */
-    @Column(isNull = false)
+    @Unique
     private Long deptId;
 
 }

@@ -2,6 +2,7 @@ package com.cdmzl.system.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cdmzl.common.actable.annotation.Column;
+import com.cdmzl.common.actable.annotation.Unique;
 import lombok.Data;
 
 /**
@@ -16,13 +17,13 @@ public class SysUserRole {
     /**
      * 用户ID
      */
-    @Column(isKey = true)
+    @Unique
     private Long userId;
 
     /**
      * 角色ID
      */
-    @Column(isKey = true)
+    @Unique
     private Long roleId;
 
 }

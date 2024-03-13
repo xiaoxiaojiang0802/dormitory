@@ -1,5 +1,6 @@
 package com.cdmzl.common.actable.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cdmzl.common.actable.annotation.IgnoreUpdate;
@@ -183,7 +184,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
             return;
         } else {
             // 判断表注释是否要更新
-            if (!StringUtils.isEmpty(tableComment) && !tableComment.equals(table.getTable_comment())) {
+            if (StrUtil.isNotEmpty(tableComment) && !tableComment.equals(table.getTable_comment())) {
                 map.put(SysMysqlTable.TABLE_COMMENT_KEY, tableComment);
             }
             // 判断表字符集是否要更新
@@ -266,7 +267,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
         for (Object obj : allFieldList) {
             CreateTableParam createTableParam = (CreateTableParam) obj;
             if (null != createTableParam.getFiledIndexName()
-                && !allIndexAndUniqueNames.contains(createTableParam.getFiledIndexName())) {
+                    && !allIndexAndUniqueNames.contains(createTableParam.getFiledIndexName())) {
                 addIndexFieldList.add(createTableParam);
             }
         }
@@ -288,7 +289,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
         for (Object obj : allFieldList) {
             CreateTableParam createTableParam = (CreateTableParam) obj;
             if (null != createTableParam.getFiledUniqueName()
-                && !allIndexAndUniqueNames.contains(createTableParam.getFiledUniqueName())) {
+                    && !allIndexAndUniqueNames.contains(createTableParam.getFiledUniqueName())) {
                 addUniqueFieldList.add(createTableParam);
             }
         }
@@ -340,7 +341,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
             CreateTableParam createTableParam = fieldMap.get(sysColumn.getColumn_name().toLowerCase());
             if (createTableParam != null) {
                 // 原本是主键，现在不是了，那么要去做删除主键的操作
-                if ("PRI".equals(sysColumn.getColumn_key()) && createTableParam.isFieldIsKey()) {
+                if ("PRI".equals(sysColumn.getColumn_key()) && !createTableParam.isFieldIsKey()) {
                     dropKeyFieldList.add(createTableParam);
                 }
             }
@@ -391,7 +392,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
                 } else if (createTableParam.getFileTypeLength() == 2) {
                     // 拼接出类型加长度，比如varchar(1)
                     typeAndLength = typeAndLength + "(" + createTableParam.getFieldLength() + ","
-                        + createTableParam.getFieldDecimalLength() + ")";
+                            + createTableParam.getFieldDecimalLength() + ")";
                 }
 
                 // 判断类型+长度是否相同
@@ -418,13 +419,13 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
                 } else if (!sysColumn.getColumn_default().equals(createTableParam.getFieldDefaultValue())) {
                     if (MySqlTypeConstant.BIT.toString().toLowerCase().equals(createTableParam.getFieldType()) && !createTableParam.isFieldDefaultValueNative()) {
                         if (("true".equals(createTableParam.getFieldDefaultValue()) || "1".equals(createTableParam.getFieldDefaultValue()))
-                            && !"b'1'".equals(sysColumn.getColumn_default())) {
+                                && !"b'1'".equals(sysColumn.getColumn_default())) {
                             // 两者不相等时，需要更新该字段
                             modifyFieldList.add(modifyTableParam);
                             continue;
                         }
                         if (("false".equals(createTableParam.getFieldDefaultValue()) || "0".equals(createTableParam.getFieldDefaultValue()))
-                            && !"b'0'".equals(sysColumn.getColumn_default())) {
+                                && !"b'0'".equals(sysColumn.getColumn_default())) {
                             // 两者不相等时，需要更新该字段
                             modifyFieldList.add(modifyTableParam);
                             continue;
@@ -571,22 +572,22 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
                 Index index = field.getAnnotation(Index.class);
                 if (null != index) {
                     String[] indexValue = index.columns();
-                    param.setFiledIndexName((index.value() == null || index.value().equals(""))
-                        ? (idxPrefix + ((indexValue.length == 0) ? ColumnUtils.getColumnName(field, clas) : stringArrFormat(indexValue)))
-                        : idxPrefix + index.value());
+                    param.setFiledIndexName((index.value() == null || index.value().isEmpty())
+                            ? (idxPrefix + ((indexValue.length == 0) ? ColumnUtils.getColumnName(field, clas) : stringArrFormat(indexValue)))
+                            : idxPrefix + index.value());
                     param.setFiledIndexValue(
-                        indexValue.length == 0 ? Arrays.asList(ColumnUtils.getColumnName(field, clas)) : Arrays.asList(indexValue));
+                            indexValue.length == 0 ? Collections.singletonList(ColumnUtils.getColumnName(field, clas)) : Arrays.asList(indexValue));
                 }
                 // 获取当前字段的@Unique注解
                 Unique unique = field.getAnnotation(Unique.class);
                 if (null != unique) {
                     String[] uniqueValue = unique.columns();
-                    param.setFiledUniqueName((unique.value() == null || unique.value().equals(""))
-                        ? (uniPrefix
-                        + ((uniqueValue.length == 0) ? ColumnUtils.getColumnName(field, clas) : stringArrFormat(uniqueValue)))
-                        : uniPrefix + unique.value());
+                    param.setFiledUniqueName((unique.value() == null || unique.value().isEmpty())
+                            ? (uniPrefix
+                            + ((uniqueValue.length == 0) ? ColumnUtils.getColumnName(field, clas) : stringArrFormat(uniqueValue)))
+                            : uniPrefix + unique.value());
                     param.setFiledUniqueValue(
-                        uniqueValue.length == 0 ? Arrays.asList(ColumnUtils.getColumnName(field, clas)) : Arrays.asList(uniqueValue));
+                            uniqueValue.length == 0 ? Arrays.asList(ColumnUtils.getColumnName(field, clas)) : Arrays.asList(uniqueValue));
                 }
                 // 获取当前字段的@IgnoreUpdate注解
                 IgnoreUpdate ignoreUpdate = field.getAnnotation(IgnoreUpdate.class);
@@ -604,7 +605,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
      */
     private String stringArrFormat(String[] arr) {
         return Arrays.toString(arr).replaceAll(",", "_").replaceAll(" ", "").replace("[", "")
-            .replace("]", "");
+                .replace("]", "");
     }
 
     /**
@@ -748,7 +749,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
      */
     private void modifyFieldsByMap(Map<String, TableConfig> modifyTableMap) {
         // 做修改字段操作
-        if (modifyTableMap.size() > 0) {
+        if (!modifyTableMap.isEmpty()) {
             for (Entry<String, TableConfig> entry : modifyTableMap.entrySet()) {
                 for (Object obj : entry.getValue().getList()) {
                     Map<String, Object> map = new HashMap<>();
@@ -769,7 +770,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
      */
     private void removeFieldsByMap(Map<String, TableConfig> removeTableMap) {
         // 做删除字段操作
-        if (removeTableMap.size() > 0) {
+        if (!removeTableMap.isEmpty()) {
             for (Entry<String, TableConfig> entry : removeTableMap.entrySet()) {
                 for (Object obj : entry.getValue().getList()) {
                     Map<String, Object> map = new HashMap<String, Object>();

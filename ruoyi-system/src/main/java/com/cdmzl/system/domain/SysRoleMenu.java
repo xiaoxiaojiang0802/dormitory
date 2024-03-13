@@ -3,6 +3,7 @@ package com.cdmzl.system.domain;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cdmzl.common.actable.annotation.Column;
 import com.cdmzl.common.actable.annotation.Table;
+import com.cdmzl.common.actable.annotation.Unique;
 import lombok.Data;
 
 /**
@@ -18,13 +19,13 @@ public class SysRoleMenu {
     /**
      * 角色ID
      */
-    @Column(isNull = false)
+    @Unique
     private Long roleId;
 
     /**
      * 菜单ID
      */
-    @Column(isNull = false)
+    @Unique
     private Long menuId;
 
 }
