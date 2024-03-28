@@ -4,6 +4,8 @@ import cn.hutool.core.lang.Dict;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.http.HtmlUtil;
 import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.cdmzl.common.config.RuoYiConfig;
 import com.cdmzl.common.constant.Constants;
 import com.cdmzl.common.utils.JsonUtils;
@@ -22,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AddressUtils {
 
     // IP地址查询
-    public static final String IP_URL = "http://whois.pconline.com.cn/ipJson.jsp";
+    public static final String IP_URL = "http://apis.juhe.cn/ip/ipNewV3";
 
     // 未知地址
     public static final String UNKNOWN = "XX XX";
@@ -40,16 +42,17 @@ public class AddressUtils {
         if (RuoYiConfig.isAddressEnabled()) {
             try {
                 String rspStr = HttpUtil.createGet(IP_URL)
-                    .body("ip=" + ip + "&json=true", Constants.GBK)
-                    .execute()
-                    .body();
+                        .body("ip=" + ip + "&key=15260a4d45792504874047fdb5b0d2fd", Constants.GBK)
+                        .execute()
+                        .body();
                 if (StringUtils.isEmpty(rspStr)) {
                     log.error("获取地理位置异常 {}", ip);
                     return UNKNOWN;
                 }
-                Dict obj = JsonUtils.parseMap(rspStr);
-                String region = obj.getStr("pro");
-                String city = obj.getStr("city");
+                JSONObject obj = JSON.parseObject(rspStr);
+                assert obj != null;
+                String region = obj.getJSONObject("result").getString("Province");
+                String city = obj.getJSONObject("result").getString("City");
                 return String.format("%s %s", region, city);
             } catch (Exception e) {
                 log.error("获取地理位置异常 {}", ip);

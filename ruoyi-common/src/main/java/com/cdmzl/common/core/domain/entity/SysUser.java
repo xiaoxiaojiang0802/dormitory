@@ -87,6 +87,11 @@ public class SysUser extends BaseEntity {
      */
     @Column
     private String sex;
+    /**
+     * 是否分配床位
+     */
+    @Column
+    private String inDormitory;
 
     /**
      * 用户头像
@@ -99,9 +104,9 @@ public class SysUser extends BaseEntity {
      */
     @Column
     @TableField(
-        insertStrategy = FieldStrategy.NOT_EMPTY,
-        updateStrategy = FieldStrategy.NOT_EMPTY,
-        whereStrategy = FieldStrategy.NOT_EMPTY
+            insertStrategy = FieldStrategy.NOT_EMPTY,
+            updateStrategy = FieldStrategy.NOT_EMPTY,
+            whereStrategy = FieldStrategy.NOT_EMPTY
     )
     private String password;
 
