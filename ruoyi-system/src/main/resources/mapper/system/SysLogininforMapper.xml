@@ -16,4 +16,47 @@
         <result property="loginTime" column="login_time"/>
     </resultMap>
 
+    <select id="listLoginInfoIndex" resultType="com.cdmzl.system.domain.vo.SysLoginInfoIndex">
+        select d.date                     as date_str,
+               IFNULL(T.login_failed, 0)  as login_failed,
+               IFNULL(T.login_success, 0) as login_success
+        from (SELECT CURDATE() AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 1 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 2 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 3 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 4 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 5 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 6 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 7 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 8 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 9 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 10 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 11 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 12 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 13 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 14 DAY) AS date
+              UNION ALL
+              SELECT DATE_SUB(CURDATE(), INTERVAL 15 DAY) AS date) d
+                 left join(select DATE_FORMAT(login_time, '%Y-%m-%d')           as login_date,
+                                  sum(case when status = '1' then 1 else 0 end) as login_failed,
+                                  sum(case when status = '0' then 1 else 0 end) as login_success
+                           from sys_logininfor
+                           group by DATE_FORMAT(login_time, '%Y-%m-%d')) T on T.login_date = d.date
+        GROUP BY d.date
+    </select>
+
 </mapper>

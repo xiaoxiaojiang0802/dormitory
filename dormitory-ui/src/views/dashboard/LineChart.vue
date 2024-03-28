@@ -1,9 +1,10 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}" />
+  <div :class="className" :style="{height:height,width:width}"/>
 </template>
 
 <script>
 import echarts from 'echarts'
+
 require('echarts/theme/macarons') // echarts theme
 import resize from './mixins/resize'
 
@@ -59,12 +60,13 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
+      console.log("----------",this.chartData);
       this.setOptions(this.chartData)
     },
-    setOptions({ expectedData, actualData } = {}) {
+    setOptions({expectedData, actualData, label} = {}) {
       this.chart.setOption({
         xAxis: {
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: label,
           boundaryGap: false,
           axisTick: {
             show: false
@@ -90,10 +92,10 @@ export default {
           }
         },
         legend: {
-          data: ['expected', 'actual']
+          data: ['失败', '成功']
         },
         series: [{
-          name: 'expected', itemStyle: {
+          name: '失败', itemStyle: {
             normal: {
               color: '#FF005A',
               lineStyle: {
@@ -108,26 +110,26 @@ export default {
           animationDuration: 2800,
           animationEasing: 'cubicInOut'
         },
-        {
-          name: 'actual',
-          smooth: true,
-          type: 'line',
-          itemStyle: {
-            normal: {
-              color: '#3888fa',
-              lineStyle: {
-                color: '#3888fa',
-                width: 2
-              },
-              areaStyle: {
-                color: '#f3f8ff'
+          {
+            name: '成功',
+            smooth: true,
+            type: 'line',
+            itemStyle: {
+              normal: {
+                color: '#34bfa3',
+                lineStyle: {
+                  color: '#34bfa3',
+                  width: 2
+                },
+                areaStyle: {
+                  color: '#f3f8ff'
+                }
               }
-            }
-          },
-          data: actualData,
-          animationDuration: 2800,
-          animationEasing: 'quadraticOut'
-        }]
+            },
+            data: actualData,
+            animationDuration: 2800,
+            animationEasing: 'quadraticOut'
+          }]
       })
     }
   }

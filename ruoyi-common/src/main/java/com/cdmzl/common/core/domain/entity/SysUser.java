@@ -94,6 +94,12 @@ public class SysUser extends BaseEntity {
     private String inDormitory;
 
     /**
+     * 学号
+     */
+    @Column
+    private String cardId;
+
+    /**
      * 用户头像
      */
     @Column

@@ -3,6 +3,7 @@ package com.cdmzl.system.service;
 import com.cdmzl.common.core.domain.PageQuery;
 import com.cdmzl.common.core.page.TableDataInfo;
 import com.cdmzl.system.domain.SysLogininfor;
+import com.cdmzl.system.domain.vo.SysLoginInfoIndex;
 
 import java.util.List;
 
@@ -43,4 +44,6 @@ public interface ISysLogininforService {
      * 清空系统登录日志
      */
     void cleanLogininfor();
+
+    List<SysLoginInfoIndex> listLoginInfoIndex();
 }

@@ -7,6 +7,7 @@ import com.cdmzl.common.annotation.DataColumn;
 import com.cdmzl.common.annotation.DataPermission;
 import com.cdmzl.common.core.domain.entity.SysUser;
 import com.cdmzl.common.core.mapper.BaseMapperPlus;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  *
  * @author ruoyi
  */
+@Mapper
 public interface SysUserMapper extends BaseMapperPlus<SysUserMapper, SysUser> {
 
     @DataPermission({

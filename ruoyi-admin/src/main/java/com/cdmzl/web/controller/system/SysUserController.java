@@ -22,8 +22,10 @@ import com.cdmzl.common.helper.LoginHelper;
 import com.cdmzl.common.utils.StreamUtils;
 import com.cdmzl.common.utils.StringUtils;
 import com.cdmzl.common.utils.poi.ExcelUtil;
+import com.cdmzl.system.domain.vo.SysStudentImportVo;
 import com.cdmzl.system.domain.vo.SysUserExportVo;
 import com.cdmzl.system.domain.vo.SysUserImportVo;
+import com.cdmzl.system.listener.SysStudentImportListener;
 import com.cdmzl.system.listener.SysUserImportListener;
 import com.cdmzl.system.service.ISysDeptService;
 import com.cdmzl.system.service.ISysPostService;
@@ -109,6 +111,28 @@ public class SysUserController extends BaseController {
     }
 
     /**
+     * 导入数据
+     *
+     * @param file          导入文件
+     * @param updateSupport 是否更新已存在数据
+     */
+    @Log(title = "用户管理", businessType = BusinessType.IMPORT)
+    @SaCheckPermission("system:user:import")
+    @PostMapping(value = "/importStudentData", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public R<Void> importStudentData(@RequestPart("file") MultipartFile file) throws Exception {
+        ExcelResult<SysStudentImportVo> result = ExcelUtil.importExcel(file.getInputStream(), SysStudentImportVo.class, new SysStudentImportListener());
+        return R.ok(result.getAnalysis());
+    }
+
+    /**
+     * 获取导入模板
+     */
+    @PostMapping("/importStudentTemplate")
+    public void importStudentTemplate(HttpServletResponse response) {
+        ExcelUtil.exportExcel(new ArrayList<>(), "用户数据", SysStudentImportVo.class, response);
+    }
+
+    /**
      * 根据用户编号获取详细信息
      *
      * @param userId 用户ID
@@ -140,10 +164,10 @@ public class SysUserController extends BaseController {
         if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user.getUserName()))) {
             return R.fail("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
         } else if (StringUtils.isNotEmpty(user.getPhonenumber())
-            && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
+                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
             return R.fail("新增用户'" + user.getUserName() + "'失败，手机号码已存在");
         } else if (StringUtils.isNotEmpty(user.getEmail())
-            && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
+                && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
             return R.fail("新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
         user.setPassword(BCrypt.hashpw(user.getPassword()));
@@ -160,10 +184,10 @@ public class SysUserController extends BaseController {
         userService.checkUserAllowed(user);
         userService.checkUserDataScope(user.getUserId());
         if (StringUtils.isNotEmpty(user.getPhonenumber())
-            && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
+                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
             return R.fail("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
         } else if (StringUtils.isNotEmpty(user.getEmail())
-            && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
+                && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
             return R.fail("修改用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
         return toAjax(userService.updateUser(user));

@@ -68,6 +68,16 @@
           </el-col>
           <el-col :span="1.5">
             <el-button
+              type="info"
+              plain
+              icon="el-icon-upload2"
+              size="mini"
+              @click="handleImport"
+              v-hasPermi="['system:user:import']"
+            >导入</el-button>
+          </el-col>
+          <el-col :span="1.5">
+            <el-button
               type="success"
               plain
               icon="el-icon-edit"
@@ -94,7 +104,7 @@
         </el-row>
         <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center"/>
-          <el-table-column label="学号" align="center" key="cardNo" prop="cardNo"/>
+          <el-table-column label="学号" align="center" key="cardId" prop="cardId"/>
           <el-table-column label="用户名称" align="center" key="userName" prop="userName"
                            :show-overflow-tooltip="true"/>
           <el-table-column label="用户昵称" align="center" key="nickName" prop="nickName"
@@ -217,8 +227,8 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="学号" prop="cardNo">
-              <el-input v-model="form.cardNo" placeholder="请输入学号" maxlength="30"/>
+            <el-form-item label="学号" prop="cardId">
+              <el-input v-model="form.cardId" placeholder="请输入学号" maxlength="30"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -335,7 +345,7 @@ export default {
         // 设置上传的请求头部
         headers: {Authorization: "Bearer " + getToken()},
         // 上传的地址
-        url: process.env.VUE_APP_BASE_API + "/system/user/importData"
+        url: process.env.VUE_APP_BASE_API + "/system/user/importStudentData"
       },
       // 查询参数
       queryParams: {
@@ -578,12 +588,12 @@ export default {
     },
     /** 导入按钮操作 */
     handleImport() {
-      this.upload.title = "用户导入";
+      this.upload.title = "学生导入";
       this.upload.open = true;
     },
     /** 下载模板操作 */
     importTemplate() {
-      this.download('system/user/importTemplate', {}, `user_template_${new Date().getTime()}.xlsx`)
+      this.download('system/user/importStudentTemplate', {}, `student_template_${new Date().getTime()}.xlsx`)
     },
     // 文件上传中处理
     handleFileUploadProgress(event, file, fileList) {

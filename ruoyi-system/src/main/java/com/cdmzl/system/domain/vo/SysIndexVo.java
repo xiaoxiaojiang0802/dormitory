@@ -13,20 +13,20 @@ public class SysIndexVo {
     /**
      * 人数
      */
-    private Integer personCount;
+    private Long personCount;
 
     /**
-     * 消息
+     * 空闲寝室
      */
-    private Integer spareRoom;
+    private Long spareRoom;
 
     /**
      * 维修
      */
-    private Integer turnover;
+    private Long turnover;
 
     /**
-     * 维保
+     * 访客
      */
-    private Integer orderCount;
+    private Long orderCount;
 }

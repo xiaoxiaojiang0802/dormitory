@@ -9,10 +9,10 @@ import com.cdmzl.common.constant.Constants;
 import com.cdmzl.common.core.domain.PageQuery;
 import com.cdmzl.common.core.page.TableDataInfo;
 import com.cdmzl.common.core.service.LogininforService;
-import com.cdmzl.common.utils.ServletUtils;
 import com.cdmzl.common.utils.StringUtils;
 import com.cdmzl.common.utils.ip.AddressUtils;
 import com.cdmzl.system.domain.SysLogininfor;
+import com.cdmzl.system.domain.vo.SysLoginInfoIndex;
 import com.cdmzl.system.mapper.SysLogininforMapper;
 import com.cdmzl.system.service.ISysLogininforService;
 import lombok.RequiredArgsConstructor;
@@ -150,5 +150,10 @@ public class SysLogininforServiceImpl implements ISysLogininforService, Logininf
     @Override
     public void cleanLogininfor() {
         baseMapper.delete(new LambdaQueryWrapper<>());
+    }
+
+    @Override
+    public List<SysLoginInfoIndex> listLoginInfoIndex() {
+        return baseMapper.listLoginInfoIndex();
     }
 }

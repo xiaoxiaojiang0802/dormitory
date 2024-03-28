@@ -2,8 +2,11 @@ package com.cdmzl.web.controller.system;
 
 import com.cdmzl.common.annotation.Anonymous;
 import com.cdmzl.common.config.RuoYiConfig;
+import com.cdmzl.common.core.domain.R;
 import com.cdmzl.common.utils.StringUtils;
+import com.cdmzl.dormitory.service.ISysIndexService;
 import com.cdmzl.system.service.ISysDeptService;
+import com.cdmzl.system.service.ISysLogininforService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +26,8 @@ public class SysIndexController {
     private final RuoYiConfig ruoyiConfig;
 
     private final ISysDeptService sysDeptService;
+    private final ISysIndexService sysIndexService;
+    private final ISysLogininforService sysLogininforService;
 
     /**
      * 访问首页，提示语
@@ -42,7 +47,15 @@ public class SysIndexController {
         return sysDeptService.getInfo();
     }
 
+    @GetMapping("/selectIndex")
+    public R selectIndex() {
+        return R.ok(sysIndexService.selectIndex());
+    }
 
+    @GetMapping("/listLoginInfoIndex")
+    public R listLoginInfoIndex() {
+        return R.ok(sysLogininforService.listLoginInfoIndex());
+    }
 
 
 }

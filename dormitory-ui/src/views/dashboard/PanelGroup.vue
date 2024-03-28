@@ -20,9 +20,9 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            消息
+            访客
           </div>
-          <count-to :start-val="0" :end-val="indexVo.spareRoom" :duration="3000" class="card-panel-num"/>
+          <count-to :start-val="0" :end-val="indexVo.orderCount" :duration="3000" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
@@ -46,9 +46,9 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            维保
+            闲置
           </div>
-          <count-to :start-val="0" :end-val="indexVo.orderCount" :duration="3600" class="card-panel-num"/>
+          <count-to :start-val="0" :end-val="indexVo.spareRoom" :duration="3600" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
@@ -57,6 +57,7 @@
 
 <script>
 import CountTo from 'vue-count-to';
+import {selectIndex} from "@/api/system";
 
 export default {
   data() {
@@ -72,10 +73,18 @@ export default {
   components: {
     CountTo
   },
+  created() {
+    this.selectIndex();
+  },
   methods: {
     handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
+      // this.$emit('handleSetLineChartData', type)
     },
+    selectIndex() {
+      selectIndex().then(res => {
+        this.indexVo = res.data;
+      })
+    }
   }
 }
 </script>
