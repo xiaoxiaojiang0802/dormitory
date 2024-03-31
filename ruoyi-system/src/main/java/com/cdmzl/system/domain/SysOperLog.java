@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cdmzl.common.actable.annotation.Column;
+import com.cdmzl.common.actable.constants.MySqlTypeConstant;
 import com.cdmzl.common.annotation.ExcelDictFormat;
 import com.cdmzl.common.convert.ExcelDictConvert;
 import lombok.Data;
@@ -138,7 +139,7 @@ public class SysOperLog implements Serializable {
     /**
      * 错误消息
      */
-    @Column
+    @Column(type = MySqlTypeConstant.LONGTEXT)
     @ExcelProperty(value = "错误消息")
     private String errorMsg;
 

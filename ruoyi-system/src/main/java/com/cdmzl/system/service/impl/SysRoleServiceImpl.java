@@ -1,6 +1,7 @@
 package com.cdmzl.system.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -229,6 +230,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     public int insertRole(SysRole role) {
         role.setDelFlag(UserConstants.NORMAL);
         // 新增角色信息
+        role.setRoleId(IdUtil.getSnowflakeNextId());
         baseMapper.insert(role);
         return insertRoleMenu(role);
     }
@@ -292,7 +294,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
             rm.setMenuId(menuId);
             list.add(rm);
         }
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             rows = roleMenuMapper.insertBatch(list) ? list.size() : 0;
         }
         return rows;

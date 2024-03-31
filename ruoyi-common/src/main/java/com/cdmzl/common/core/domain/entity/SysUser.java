@@ -66,6 +66,10 @@ public class SysUser extends BaseEntity {
     @Column
     private String userType;
 
+
+    @Column(type = MySqlTypeConstant.CHAR, length = 1)
+    private String userCategory;
+
     /**
      * 用户邮箱
      */

@@ -30,7 +30,7 @@ public class SysIndexServiceImpl implements ISysIndexService {
         SysIndexVo sysIndexVo = new SysIndexVo();
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(SysUser::getDelFlag, 0);
-        wrapper.eq(SysUser::getUserType, "1");
+        wrapper.eq(SysUser::getUserCategory, "1");
         sysIndexVo.setPersonCount(sysUserMapper.selectCount(wrapper));
         sysIndexVo.setTurnover(dorRepairOrderMapper.selectCount(null));
         sysIndexVo.setOrderCount(dorVisitorMapper.selectCount(null));

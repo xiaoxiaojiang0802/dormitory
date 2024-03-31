@@ -17,13 +17,11 @@ public class SysUserRole {
     /**
      * 用户ID
      */
-    @Unique
     private Long userId;
 
     /**
      * 角色ID
      */
-    @Unique
     private Long roleId;
 
 }

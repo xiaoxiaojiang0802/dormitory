@@ -89,7 +89,8 @@ public class SysRoleController extends BaseController {
         } else if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleKeyUnique(role))) {
             return R.fail("新增角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
-        return toAjax(roleService.insertRole(role));
+        int count = roleService.insertRole(role);
+        return toAjax(count);
 
     }
 

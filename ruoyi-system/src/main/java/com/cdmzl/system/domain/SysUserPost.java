@@ -19,13 +19,11 @@ public class SysUserPost {
     /**
      * 用户ID
      */
-    @Index
     private Long userId;
 
     /**
      * 岗位ID
      */
-    @Index
     private Long postId;
 
 }

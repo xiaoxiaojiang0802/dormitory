@@ -77,6 +77,7 @@ public class SysUserServiceImpl implements ISysUserService {
         wrapper.eq("u.del_flag", UserConstants.USER_NORMAL)
             .eq(ObjectUtil.isNotNull(user.getUserId()), "u.user_id", user.getUserId())
             .eq(ObjectUtil.isNotNull(user.getUserType()), "u.user_type", user.getUserType())
+            .eq(ObjectUtil.isNotNull(user.getUserCategory()), "u.user_category", user.getUserCategory())
             .like(StringUtils.isNotBlank(user.getUserName()), "u.user_name", user.getUserName())
             .eq(StringUtils.isNotBlank(user.getStatus()), "u.status", user.getStatus())
             .like(StringUtils.isNotBlank(user.getPhonenumber()), "u.phonenumber", user.getPhonenumber())

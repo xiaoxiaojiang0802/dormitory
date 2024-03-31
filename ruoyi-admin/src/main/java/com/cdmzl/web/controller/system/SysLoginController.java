@@ -85,7 +85,7 @@ public class SysLoginController {
     public R<Map<String, Object>> xcxLogin(@NotBlank(message = "{xcx.code.not.blank}") String xcxCode) {
         Map<String, Object> ajax = new HashMap<>();
         // 生成令牌
-        String token = loginService.xcxLogin(xcxCode);
+        String token = loginService.xcxLogin();
         ajax.put(Constants.TOKEN, token);
         return R.ok(ajax);
     }

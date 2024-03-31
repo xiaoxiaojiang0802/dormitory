@@ -98,7 +98,7 @@ public class SysLoginService {
     }
 
 
-    public String xcxLogin(String xcxCode) {
+    public String xcxLogin() {
         HttpServletRequest request = ServletUtils.getRequest();
         // xcxCode 为 小程序调用 wx.login 授权后获取
         // todo 以下自行实现

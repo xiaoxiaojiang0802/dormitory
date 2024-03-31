@@ -19,13 +19,11 @@ public class SysRoleMenu {
     /**
      * 角色ID
      */
-    @Unique
     private Long roleId;
 
     /**
      * 菜单ID
      */
-    @Unique
     private Long menuId;
 
 }

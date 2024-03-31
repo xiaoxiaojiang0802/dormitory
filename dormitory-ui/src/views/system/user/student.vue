@@ -326,7 +326,7 @@ export default {
       roleOptions: [],
       // 表单参数
       form: {
-        userType: '1',
+        userCategory: '1',
       },
       defaultProps: {
         children: "children",
@@ -351,7 +351,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        userType: '1',
+        userCategory: '1',
         userName: undefined,
         phonenumber: undefined,
         status: undefined,
@@ -426,17 +426,8 @@ export default {
         this.deptOptions = response.data;
       });
     },
-    // 筛选节点
-    filterNode(value, data) {
-      if (!value) return true;
-      return data.label.indexOf(value) !== -1;
-    },
-    // 节点单击事件
-    handleNodeClick(data) {
-      this.queryParams.deptId = data.id;
-      this.handleQuery();
-    },
-    // 用户状态修改
+// 筛选节点
+// 用户状态修改
     handleStatusChange(row) {
       let text = row.status === "0" ? "启用" : "停用";
       this.$modal.confirm('确认要"' + text + '""' + row.userName + '"用户吗？').then(function () {
@@ -489,19 +480,7 @@ export default {
       this.single = selection.length != 1;
       this.multiple = !selection.length;
     },
-    // 更多操作触发
-    handleCommand(command, row) {
-      switch (command) {
-        case "handleResetPwd":
-          this.handleResetPwd(row);
-          break;
-        case "handleAuthRole":
-          this.handleAuthRole(row);
-          break;
-        default:
-          break;
-      }
-    },
+// 更多操作触发
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();

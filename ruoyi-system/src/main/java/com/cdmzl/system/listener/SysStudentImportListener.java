@@ -6,6 +6,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.cdmzl.common.core.domain.entity.SysUser;
+import com.cdmzl.common.enums.UserType;
 import com.cdmzl.common.excel.ExcelListener;
 import com.cdmzl.common.excel.ExcelResult;
 import com.cdmzl.common.exception.ServiceException;
@@ -59,7 +60,8 @@ public class SysStudentImportListener extends AnalysisEventListener<SysStudentIm
                 ValidatorUtils.validate(user);
                 user.setPassword(password);
                 user.setCreateBy(operName);
-                user.setUserType("1");
+                user.setUserType(UserType.SYS_USER.getUserType());
+                user.setUserCategory("1");
                 userService.insertUser(user);
                 successNum++;
                 successMsg.append("<br/>").append(successNum).append("、账号 ").append(user.getUserName()).append(" 导入成功");

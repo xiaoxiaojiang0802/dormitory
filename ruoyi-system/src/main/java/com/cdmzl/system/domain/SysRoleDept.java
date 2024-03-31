@@ -18,13 +18,11 @@ public class SysRoleDept {
     /**
      * 角色ID
      */
-    @Unique
     private Long roleId;
 
     /**
      * 部门ID
      */
-    @Unique
     private Long deptId;
 
 }

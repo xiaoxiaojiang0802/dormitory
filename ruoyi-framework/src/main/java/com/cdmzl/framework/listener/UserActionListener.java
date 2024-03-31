@@ -27,8 +27,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class UserActionListener implements SaTokenListener {
 
-    private final SaTokenConfig tokenConfig;
-
     /**
      * 每次登录时触发
      */
