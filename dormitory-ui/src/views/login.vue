@@ -39,6 +39,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
+      <span>V{{ sysConfig.version}}  Copyright © {{ sysConfig.copyrightYear}} cdmzl.cn All Rights Reserved.</span>
     </div>
     <el-dialog title="公众号二维码" :visible.sync="dialogVisible" :show-close="false" :center="true" width="30%">
       <div style="text-align: center">
@@ -63,6 +64,7 @@ import {
   encrypt,
   decrypt
 } from '@/utils/jsencrypt'
+import {getVersion} from "@/api/system";
 
 export default {
   name: "Login",
@@ -99,7 +101,8 @@ export default {
       captchaEnabled: true,
       // 注册开关
       register: false,
-      redirect: undefined
+      redirect: undefined,
+      sysConfig: undefined
     };
   },
   watch: {
@@ -112,6 +115,7 @@ export default {
   },
   created() {
     this.getCode();
+    this.getVersion();
     this.getCookie();
   },
   methods: {
@@ -123,6 +127,10 @@ export default {
           this.loginForm.uuid = res.data.uuid;
         }
       });
+    }, getVersion() {
+      getVersion().then(data => {
+        this.sysConfig = data;
+      })
     },
     getCookie() {
       const username = Cookies.get("username");

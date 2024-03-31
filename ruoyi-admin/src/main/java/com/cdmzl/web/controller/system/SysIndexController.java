@@ -39,6 +39,19 @@ public class SysIndexController {
     }
 
     /**
+     * 访问首页，提示语
+     */
+    @Anonymous
+    @GetMapping("/getVersion")
+    public RuoYiConfig getVersion() {
+        RuoYiConfig config = new RuoYiConfig();
+        config.setCopyrightYear(ruoyiConfig.getCopyrightYear());
+        config.setVersion(ruoyiConfig.getVersion());
+        return config;
+    }
+
+
+    /**
      * 系统info
      */
     @Anonymous

@@ -8,6 +8,14 @@ export function selectIndex() {
 }
 
 
+export function getVersion() {
+  return request({
+    url: '/getVersion',
+    method: 'get',
+  })
+}
+
+
 export function listLoginInfoIndex() {
   return request({
     url: '/listLoginInfoIndex',
