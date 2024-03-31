@@ -32,7 +32,7 @@ public class DorBedServiceImpl extends ServiceImpl<DorBedMapper, DorBed> impleme
     public R<Void> addBed(DorBed bed) {
         Long count = baseMapper.selectCount(new LambdaQueryWrapper<DorBed>().eq(DorBed::getDormitoryId, bed.getDormitoryId()));
         DorDormitory dorDormitory = dorDormitoryMapper.selectById(bed.getDormitoryId());
-        if (count >= Long.parseLong(dorDormitory.getDormitoryType())) {
+        if (dorDormitory != null && count >= Long.parseLong(dorDormitory.getDormitoryType())) {
             return R.fail("宿舍床位已满无法新增!");
         }
         baseMapper.insert(bed);

@@ -76,8 +76,13 @@
     <!-- 添加或修改床位对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="宿舍" prop="dormitoryId">
-          <el-input v-model="form.dormitoryId" placeholder="请输入宿舍"/>
+        <el-form-item label="宿舍楼" prop="dormitoryId">
+          <el-select clearable v-model="form.dormitoryId" style="width:100%">
+            <el-option v-for="item in dormitoryList" :key="item.dormitoryId"
+                       :value="item.dormitoryId" :label="item.dormitoryNumber">
+              {{ item.dormitoryNumber }}
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="床位编号" prop="bedNumber">
           <el-input v-model="form.bedNumber" placeholder="请输入床位编号"/>
@@ -252,10 +257,9 @@ export default {
       this.getList();
     },
     submitForm() {
-      this.form.dormitoryId = this.queryParams.dormitoryId;
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.createBy != null) {
+          if (this.form.bedId != null) {
             updateBed(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
