@@ -15,8 +15,16 @@ public interface DorDormitoryService extends IService<DorDormitory> {
     /**
      * 新增宿舍
      *
-     * @param dorDormitory 苏浙
+     * @param dorDormitory 宿舍
      */
     void addDormitory(DorDormitory dorDormitory);
+
+
+    /**
+     * 修改宿舍信息
+     *
+     * @param dorDormitory 宿舍
+     */
+    void updateDormitory(DorDormitory dorDormitory);
 
 }

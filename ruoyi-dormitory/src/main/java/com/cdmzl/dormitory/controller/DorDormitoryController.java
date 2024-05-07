@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 【请填写功能名称】Controller
+ * 宿舍
  *
  * @author xiaojiang
  * @date 2023-05-15
@@ -27,7 +27,7 @@ public class DorDormitoryController extends BaseController {
     private final DorDormitoryService dorDormitoryService;
 
     /**
-     * 查询【请填写功能名称】列表
+     * 分页查询宿舍
      */
     @GetMapping("/page")
     public R page(Page page, DorDormitory dorDormitory) {
@@ -35,7 +35,7 @@ public class DorDormitoryController extends BaseController {
     }
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询宿舍列表
      */
     @GetMapping("/list")
     public R list(DorDormitory dorDormitory) {
@@ -43,7 +43,7 @@ public class DorDormitoryController extends BaseController {
     }
 
     /**
-     * 导出【请填写功能名称】列表
+     * 导出宿舍列表
      */
     @PostMapping("/export")
     public void export(HttpServletResponse response, DorDormitory dorDormitory) {
@@ -52,7 +52,7 @@ public class DorDormitoryController extends BaseController {
     }
 
     /**
-     * 获取【请填写功能名称】详细信息
+     * 获取宿舍详细信息
      */
     @GetMapping(value = "getById/{id}")
     public R getById(@PathVariable("id") Long id) {
@@ -60,7 +60,7 @@ public class DorDormitoryController extends BaseController {
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增宿舍
      */
     @PostMapping
     public R add(@RequestBody DorDormitory dorDormitory) {
@@ -73,7 +73,8 @@ public class DorDormitoryController extends BaseController {
      */
     @PutMapping
     public R edit(@RequestBody DorDormitory dorDormitory) {
-        return R.ok(dorDormitoryService.updateById(dorDormitory));
+        dorDormitoryService.updateDormitory(dorDormitory);
+        return R.ok();
     }
 
     /**

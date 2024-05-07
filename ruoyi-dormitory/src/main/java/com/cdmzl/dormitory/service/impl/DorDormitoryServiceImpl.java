@@ -11,6 +11,9 @@ import com.cdmzl.dormitory.service.DorDormitoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 【请填写功能名称】Service业务层处理
  *
@@ -23,16 +26,41 @@ public class DorDormitoryServiceImpl extends ServiceImpl<DorDormitoryMapper, Dor
 
     private final DorBedMapper bedMapper;
 
+    /**
+     * 新增宿舍
+     *
+     * @param dorDormitory 宿舍信息
+     */
     @Override
     public void addDormitory(DorDormitory dorDormitory) {
         dorDormitory.setDormitoryId(IdUtil.getSnowflakeNextId());
+        /*初始化床位信息*/
         for (int i = 0; i < Integer.parseInt(dorDormitory.getDormitoryType()); i++) {
             DorBed bed = new DorBed();
             bed.setDormitoryId(dorDormitory.getDormitoryId());
-            bed.setBedNumber(String.valueOf(i + 1));
+            bed.setBedNumber(dorDormitory.getDormitoryNumber() + (i + 1));
             bed.setStatus("1");
             bedMapper.insert(bed);
         }
         baseMapper.insert(dorDormitory);
+    }
+
+    /**
+     * 修改宿舍信息
+     *
+     * @param dorDormitory 宿舍
+     */
+    @Override
+    public void updateDormitory(DorDormitory dorDormitory) {
+        for (int i = 0; i < Integer.parseInt(dorDormitory.getDormitoryType()); i++) {
+            DorBed bed = new DorBed();
+            bed.setDormitoryId(dorDormitory.getDormitoryId());
+            bed.setBedNumber(dorDormitory.getDormitoryNumber() + (i + 1));
+            bed.setStatus("1");
+            if (!bedMapper.haveBed(dorDormitory.getDormitoryId(), bed.getBedNumber())) {
+                bedMapper.insert(bed);
+            }
+        }
+        baseMapper.updateById(dorDormitory);
     }
 }

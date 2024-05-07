@@ -18,8 +18,8 @@
 
     <select id="listLoginInfoIndex" resultType="com.cdmzl.system.domain.vo.SysLoginInfoIndex">
         select d.date                     as date_str,
-               IFNULL(T.login_failed, 0)  as login_failed,
-               IFNULL(T.login_success, 0) as login_success
+               IFNULL(t.login_failed, 0)  as login_failed,
+               IFNULL(t.login_success, 0) as login_success
         from (SELECT CURDATE() AS date
               UNION ALL
               SELECT DATE_SUB(CURDATE(), INTERVAL 1 DAY) AS date
@@ -55,8 +55,8 @@
                                   sum(case when status = '1' then 1 else 0 end) as login_failed,
                                   sum(case when status = '0' then 1 else 0 end) as login_success
                            from sys_logininfor
-                           group by DATE_FORMAT(login_time, '%Y-%m-%d')) T on T.login_date = d.date
-        GROUP BY d.date,t.login_failed,t.login_success
+                           group by DATE_FORMAT(login_time, '%Y-%m-%d')) t on t.login_date = d.date
+        GROUP BY d.date, t.login_failed, t.login_success
     </select>
 
 </mapper>

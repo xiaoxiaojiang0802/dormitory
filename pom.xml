@@ -319,6 +319,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.7.3</version>
                 <configuration>
+                    <classifier>exec</classifier>
                     <skip>false</skip>
                     <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
                     <mainClass>com.cdmzl.DorApplication</mainClass>
