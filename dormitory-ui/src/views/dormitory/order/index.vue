@@ -104,7 +104,7 @@
     </el-table>
 
     <pagination v-show="total>0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
-      @pagination="getList"
+                @pagination="getList"
     />
 
     <!-- 添加或修改维修工单对话框 -->
@@ -119,7 +119,7 @@
         <el-form-item label="维修状态" prop="state">
           <el-select v-model="form.state" clearable>
             <el-option v-for="item in dict.type.dor_repair_state" :key="item.value"
-            :label="item.label" :value="item.value"/>
+                       :label="item.label" :value="item.value"/>
           </el-select>
         </el-form-item>
         <el-form-item label="维修人" prop="repairUser">
@@ -146,8 +146,9 @@ import {
   updateOrder
 } from "@/api/dormitory/order";
 
+
 export default {
-  dicts:['dor_repair_state'],
+  dicts: ['dor_repair_state'],
   name: "Order",
   data() {
     return {
@@ -170,7 +171,7 @@ export default {
         confirmUser: null
       },
       form: {},
-      rules: {}
+      rules: {},
     };
   },
   created() {

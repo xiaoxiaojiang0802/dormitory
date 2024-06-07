@@ -50,7 +50,7 @@ public class DorRepairOrder extends BaseEntity {
      * 维修人
      */
     @Column(comment = "维修人")
-    private Long repairUser;
+    private String  repairUser;
 
 
     /**
@@ -63,7 +63,7 @@ public class DorRepairOrder extends BaseEntity {
      * 确认人
      */
     @Column(comment = "确认人")
-    private Long confirmUser;
+    private String confirmUser;
 
 
     /**
